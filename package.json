@@ -4,9 +4,10 @@
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development tsx index.ts",
-    "build": "npx esbuild index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
+    "build": "tsc",
     "start": "NODE_ENV=production node dist/index.js",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "postinstall": "esbuild --version"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
