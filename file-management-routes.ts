@@ -1,7 +1,7 @@
 import type { Express } from "express";
-import { upload, uploadFiles, deleteFiles, getFileCategory } from "./file-upload";
-import { getOptimizedUrl } from "./cloudinary-config";
-import { storage } from "./storage";
+import { upload, uploadFiles, deleteFiles, getFileCategory } from "./file-upload.js";
+import { getOptimizedUrl } from "./cloudinary-config.js";
+import { storage } from "./storage.js";
 
 export function setupFileManagementRoutes(app: Express) {
   // File upload endpoint for general use
