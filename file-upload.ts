@@ -1,5 +1,5 @@
 import multer from 'multer';
-import uploadToCloudinary, { deleteFromCloudinary } from './cloudinary-config';
+import uploadToCloudinary, { deleteFromCloudinary } from './cloudinary-config.js';
 
 // Configure multer for memory storage (no local file storage)
 const storage = multer.memoryStorage();

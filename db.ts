@@ -6,4 +6,4 @@
  * Replit PostgreSQL and Neon PostgreSQL.
  */
 
-export { db, pool, databaseProvider, getDatabaseStatus } from './db-config';
+export { db, pool, databaseProvider, getDatabaseStatus } from './db-config.js';
