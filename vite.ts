@@ -26,9 +26,16 @@ export function serveStatic(app: Express) {
   const distPath = path.resolve(__dirname, "public");
 
   if (!fs.existsSync(distPath)) {
-    throw new Error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`,
-    );
+    log("Public directory not found, skipping static file serving (backend-only mode)", "vite");
+    // For backend-only deployment, just return a simple message for root route
+    app.get("/", (_req, res) => {
+      res.json({ 
+        message: "2pbal Backend API", 
+        status: "running",
+        timestamp: new Date().toISOString()
+      });
+    });
+    return;
   }
 
   app.use(express.static(distPath));
