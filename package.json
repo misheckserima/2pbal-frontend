@@ -6,8 +6,7 @@
     "dev": "cross-env NODE_ENV=development tsx index.ts",
     "build": "tsc",
     "start": "NODE_ENV=production node dist/index.js",
-    "db:push": "drizzle-kit push",
-    "postinstall": "esbuild --version"
+    "db:push": "drizzle-kit push"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
@@ -29,7 +28,7 @@
     "stripe": "^18.4.0",
     "zod": "^3.24.1",
     "zod-validation-error": "^3.4.0",
-    "esbuild": "^0.24.2"
+    "ws": "^8.15.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
