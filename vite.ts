@@ -14,6 +14,10 @@ export function log(message: string, source = "express") {
 }
 
 // Vite setup removed for backend-only operation
+export function setupVite(app: Express) {
+  // No-op for backend-only operation
+  return app;
+}
 
 export function serveStatic(app: Express) {
   const distPath = path.resolve(import.meta.dirname, "public");
