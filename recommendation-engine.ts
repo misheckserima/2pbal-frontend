@@ -1,4 +1,4 @@
-import { ProfileUpdate, PackageRecommendation } from "@shared/schema";
+import { ProfileUpdate, PackageRecommendation } from "./shared/schema.js";
 
 interface PackageDefinition {
   id: string;

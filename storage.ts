@@ -12,7 +12,7 @@ import {
   type EmailVerification,
   type PackageViewTracking,
   type InsertPackageViewTracking
-} from './shared/schema';
+} from './shared/schema.js';
 import bcrypt from 'bcryptjs';
 import { randomBytes } from 'crypto';
 

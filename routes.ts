@@ -2,11 +2,11 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 // @ts-ignore - stripe module types not available
 import Stripe from "stripe";
-import { storage } from "./storage";
-import { generatePackageRecommendation } from "./recommendation-engine";
-import { setupFileManagementRoutes } from "./file-management-routes";
-import audioUploadRoutes from "./audio-upload-routes";
-import { sendEmail, generateVerificationEmailHTML } from "./email-service";
+import { storage } from "./storage.js";
+import { generatePackageRecommendation } from "./recommendation-engine.js";
+import { setupFileManagementRoutes } from "./file-management-routes.js";
+import audioUploadRoutes from "./audio-upload-routes.js";
+import { sendEmail, generateVerificationEmailHTML } from "./email-service.js";
 import { 
   loginSchema, 
   signupSchema, 
@@ -19,7 +19,7 @@ import {
   createPaymentIntentSchema,
   createSubscriptionSchema,
   cancelSubscriptionSchema
-} from "./shared/schema";
+} from "./shared/schema.js";
 // @ts-ignore - zod-validation-error module types not available
 import { fromZodError } from "zod-validation-error";
 import multer from "multer";
