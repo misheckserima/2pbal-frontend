@@ -20,8 +20,7 @@ import {
   createSubscriptionSchema,
   cancelSubscriptionSchema
 } from "../shared/schema.js";
-// @ts-ignore - zod-validation-error module types not available
-import { fromZodError } from "zod-validation-error";
+import { safeFromZodError } from "./fix-types.js";
 import multer from "multer";
 import cookieParser from "cookie-parser";
 import { z } from "zod";
@@ -126,7 +125,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const result = signupSchema.safeParse(req.body);
       if (!result.success) {
-        const errorMessage = fromZodError(result.error);
+        const errorMessage = safeFromZodError(result.error);
         return res.status(400).json({ message: errorMessage.toString() });
       }
 
@@ -183,7 +182,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const result = loginSchema.safeParse(req.body);
       if (!result.success) {
-        const errorMessage = fromZodError(result.error);
+        const errorMessage = safeFromZodError(result.error);
         return res.status(400).json({ message: errorMessage.toString() });
       }
 
@@ -428,7 +427,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const result = profileUpdateSchema.safeParse(req.body);
       if (!result.success) {
-        const errorMessage = fromZodError(result.error);
+        const errorMessage = safeFromZodError(result.error);
         return res.status(400).json({ message: errorMessage.toString() });
       }
 
@@ -502,7 +501,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const result = preferencesUpdateSchema.safeParse(req.body);
       if (!result.success) {
-        const errorMessage = fromZodError(result.error);
+        const errorMessage = safeFromZodError(result.error);
         return res.status(400).json({ message: errorMessage.toString() });
       }
 
@@ -523,7 +522,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const result = accountDeletionSchema.safeParse(req.body);
       if (!result.success) {
-        const errorMessage = fromZodError(result.error);
+        const errorMessage = safeFromZodError(result.error);
         return res.status(400).json({ message: errorMessage.toString() });
       }
 
@@ -560,7 +559,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const result = changePasswordSchema.safeParse(req.body);
       if (!result.success) {
-        const errorMessage = fromZodError(result.error);
+        const errorMessage = safeFromZodError(result.error);
         return res.status(400).json({ message: errorMessage.toString() });
       }
 
@@ -585,7 +584,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const result = emailVerificationSchema.safeParse(req.body);
       if (!result.success) {
-        const errorMessage = fromZodError(result.error);
+        const errorMessage = safeFromZodError(result.error);
         return res.status(400).json({ message: errorMessage.toString() });
       }
 
@@ -918,7 +917,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
       
       if (!result.success) {
-        const errorMessage = fromZodError(result.error);
+        const errorMessage = safeFromZodError(result.error);
         return res.status(400).json({ message: errorMessage.toString() });
       }
 
@@ -938,7 +937,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const result = createPaymentIntentSchema.safeParse(req.body);
       
       if (!result.success) {
-        const errorMessage = fromZodError(result.error);
+        const errorMessage = safeFromZodError(result.error);
         return res.status(400).json({ message: errorMessage.toString() });
       }
 
@@ -1027,7 +1026,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const result = createSubscriptionSchema.safeParse(req.body);
       
       if (!result.success) {
-        const errorMessage = fromZodError(result.error);
+        const errorMessage = safeFromZodError(result.error);
         return res.status(400).json({ message: errorMessage.toString() });
       }
 
@@ -1173,7 +1172,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const result = createSubscriptionSchema.safeParse(req.body);
       
       if (!result.success) {
-        const errorMessage = fromZodError(result.error);
+        const errorMessage = safeFromZodError(result.error);
         return res.status(400).json({ message: errorMessage.toString() });
       }
 
@@ -1290,7 +1289,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const result = cancelSubscriptionSchema.safeParse(req.body);
       
       if (!result.success) {
-        const errorMessage = fromZodError(result.error);
+        const errorMessage = safeFromZodError(result.error);
         return res.status(400).json({ message: errorMessage.toString() });
       }
 

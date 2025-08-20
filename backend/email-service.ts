@@ -1,11 +1,12 @@
 // @ts-ignore - resend module types not available
 import { Resend } from 'resend';
 
-if (!process.env.RESEND_API_KEY) {
+// Temporarily allow development without email service
+if (!process.env.RESEND_API_KEY && process.env.NODE_ENV === 'production') {
   throw new Error("RESEND_API_KEY environment variable must be set");
 }
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 interface EmailParams {
   to: string;
@@ -15,6 +16,11 @@ interface EmailParams {
 
 export async function sendEmail(params: EmailParams): Promise<boolean> {
   try {
+    if (!resend) {
+      console.log('Email service not configured, skipping email send:', params.to);
+      return true; // Return true to avoid breaking the flow
+    }
+
     const { data, error } = await resend.emails.send({
       from: '2Pbal <onboarding@resend.dev>',
       to: params.to,

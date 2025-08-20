@@ -281,7 +281,7 @@ export const changePasswordSchema = z.object({
 
 export const accountDeletionSchema = z.object({
   password: z.string().min(6, "Password is required to delete account"),
-  confirmation: z.literal("DELETE", { errorMap: () => ({ message: "Please type DELETE to confirm" }) }),
+  confirmation: z.literal("DELETE"),
 });
 
 export const emailVerificationSchema = z.object({
@@ -295,7 +295,7 @@ export const createPaymentIntentSchema = z.object({
   serviceId: z.string().optional(),
   planId: z.string().optional(),
   description: z.string().optional(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 export const createSubscriptionSchema = z.object({
