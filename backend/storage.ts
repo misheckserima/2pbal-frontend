@@ -11,10 +11,19 @@ import {
   type ActivityLog,
   type EmailVerification,
   type PackageViewTracking,
-  type InsertPackageViewTracking
+  type InsertPackageViewTracking,
+  users,
+  userSessions,
+  emailVerificationTokens,
+  packageViewTracking,
+  quotes,
+  userProjects,
+  activityLogs
 } from '../shared/schema.js';
 import bcrypt from 'bcryptjs';
 import { randomBytes } from 'crypto';
+import { db } from './db-config.js';
+import { eq, desc, and } from 'drizzle-orm';
 
 export interface IStorage {
   // User operations
@@ -172,54 +181,73 @@ export class MemStorage implements IStorage {
   }
 
   async getUserByEmail(email: string): Promise<User | undefined> {
-    for (const user of Array.from(this.users.values())) {
-      if (user.email === email) {
-        return user;
+    try {
+      const result = await db.select({
+        id: users.id,
+        email: users.email,
+        password: users.password,
+        firstName: users.firstName,
+        lastName: users.lastName,
+        company: users.company,
+        phone: users.phone,
+        isActive: users.isActive,
+        role: users.role,
+        emailVerified: users.emailVerified,
+        profileComplete: users.profileComplete,
+        createdAt: users.createdAt,
+        updatedAt: users.updatedAt
+      }).from(users).where(eq(users.email, email)).limit(1);
+      
+      // Fill in optional fields with defaults for the type
+      if (result[0]) {
+        return {
+          ...result[0],
+          jobTitle: null,
+          industry: null,
+          companySize: null,
+          website: null,
+          address: null,
+          businessGoals: null,
+          currentChallenges: null,
+          preferredBudget: null,
+          projectTimeline: null,
+          referralSource: null,
+          marketingConsent: false,
+          recommendedPackage: null,
+          recommendationScore: null,
+          recommendationReason: null,
+          recommendationDate: null,
+          avatar: null,
+          preferences: { theme: 'light', notifications: true, language: 'en', timezone: 'UTC' },
+          subscription: null,
+          lastLogin: null
+        };
       }
+      return undefined;
+    } catch (error) {
+      console.error('getUserByEmail error:', error);
+      return undefined;
     }
-    return undefined;
   }
 
   async createUser(userData: SignupData): Promise<User> {
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    const hashedPassword = await bcrypt.hash(userData.password, 12);
     
-    const user: User = {
-      id: this.nextUserId++,
+    const result = await db.insert(users).values({
       email: userData.email,
       password: hashedPassword,
       firstName: userData.firstName,
       lastName: userData.lastName,
       company: userData.company || null,
       phone: userData.phone || null,
-      jobTitle: null,
-      industry: null,
-      companySize: null,
-      website: null,
-      address: null,
-      businessGoals: null,
-      currentChallenges: null,
-      preferredBudget: null,
-      projectTimeline: null,
-      referralSource: null,
       marketingConsent: userData.marketingConsent || false,
-      profileComplete: false,
-      recommendedPackage: null,
-      recommendationScore: null,
-      recommendationReason: null,
-      recommendationDate: null,
-      isActive: true,
-      role: "user",
-      avatar: null,
       emailVerified: false,
-      preferences: { theme: 'light', notifications: true, language: 'en', timezone: 'UTC' },
-      subscription: null,
-      lastLogin: null,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    
-    this.users.set(user.id, user);
-    return user;
+      profileComplete: false,
+      isActive: true,
+      role: 'user'
+    }).returning();
+
+    return result[0];
   }
 
   async updateUser(id: number, userData: ProfileUpdate): Promise<User | undefined> {
@@ -274,32 +302,42 @@ export class MemStorage implements IStorage {
     const sessionId = randomBytes(32).toString('hex');
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
 
-    const session: UserSession = {
+    const result = await db.insert(userSessions).values({
       id: sessionId,
       userId,
       expiresAt,
       createdAt: new Date(),
-    };
-    
-    this.sessions.set(sessionId, session);
-    return session;
+    }).returning();
+
+    return result[0];
   }
 
   async getSession(sessionId: string): Promise<UserSession | undefined> {
-    const session = this.sessions.get(sessionId);
-    
-    if (!session || session.expiresAt < new Date()) {
-      if (session) {
-        await this.deleteSession(sessionId);
+    try {
+      const result = await db.select().from(userSessions)
+        .where(eq(userSessions.id, sessionId))
+        .limit(1);
+      
+      const session = result[0];
+      if (!session || session.expiresAt < new Date()) {
+        if (session) {
+          await this.deleteSession(sessionId);
+        }
+        return undefined;
       }
+      return session;
+    } catch (error) {
+      console.error('getSession error:', error);
       return undefined;
     }
-    
-    return session;
   }
 
   async deleteSession(sessionId: string): Promise<void> {
-    this.sessions.delete(sessionId);
+    try {
+      await db.delete(userSessions).where(eq(userSessions.id, sessionId));
+    } catch (error) {
+      console.error('deleteSession error:', error);
+    }
   }
 
   async createQuote(quoteData: InsertQuote): Promise<Quote> {
@@ -563,19 +601,17 @@ export class MemStorage implements IStorage {
   // Email verification token operations
   async createEmailVerificationToken(userId: number, email: string): Promise<any> {
     const token = randomBytes(32).toString('hex');
-    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
-    const verificationToken: any = {
-      id: this.nextEmailVerificationTokenId++,
+    const result = await db.insert(emailVerificationTokens).values({
       userId,
       token,
       email,
       expiresAt,
       createdAt: new Date(),
-    };
-    
-    this.emailVerificationTokens.set(token, verificationToken);
-    return verificationToken;
+    }).returning();
+
+    return result[0];
   }
 
   async getEmailVerificationToken(token: string): Promise<any | undefined> {
@@ -828,5 +864,5 @@ export class MemStorage implements IStorage {
 
 }
 
-// Use memory storage for now
-export const storage = new MemStorage();
+// Use database storage in production, memory storage for development/testing
+export const storage = process.env.NEON_DATABASE_URL ? new DatabaseStorage() : new MemStorage();
