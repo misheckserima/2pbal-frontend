@@ -122,7 +122,7 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
           <div className="flex items-center min-w-0 flex-1">
                           <Link href="/" className="flex items-center group mr-4 lg:mr-8 flex-shrink-0">
                 <img 
-                  src="/2pbal_logo.png" 
+                  src="https://res.cloudinary.com/ppbal/image/upload/v1755703718/2pbal_logo_cz5r0u.png" 
                   alt="2PBAL Logo" 
                   className="h-10 w-auto sm:h-12 lg:h-16 object-contain" 
                   onLoad={() => console.log('Logo loaded successfully')}

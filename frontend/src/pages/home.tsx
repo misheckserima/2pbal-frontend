@@ -69,7 +69,7 @@ export default function Home({ onOpenCalculator }: HomeProps) {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img 
-            src="/cover.jpg" 
+            src="https://res.cloudinary.com/ppbal/image/upload/v1755703910/cover_wmmrdn.jpg" 
             alt="Business growth and digital transformation" 
             className="w-full h-full object-cover"
             loading="eager"
@@ -179,7 +179,9 @@ export default function Home({ onOpenCalculator }: HomeProps) {
       </section>
 
       {/* Stop Overpaying Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-white">
+      <section className="py-12 sm:py-16 lg:py-20 bg-white relative">
+        {/* Add top margin to prevent overlap with floating elements */}
+        <div className="absolute top-0 left-0 right-0 h-16 bg-white"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Main Content - 8 columns on desktop, full width on mobile */}
@@ -475,18 +477,23 @@ export default function Home({ onOpenCalculator }: HomeProps) {
                   className="relative z-10"
                 >
                   <img 
-                    src="/levelup.jpg" 
+                    src="https://res.cloudinary.com/ppbal/image/upload/v1755703719/levelup_xe0e7r.jpg" 
                     alt="Level up your business with digital transformation" 
                     className="rounded-2xl shadow-2xl w-full h-auto object-cover"
                     loading="lazy"
+                    onLoad={() => console.log('Levelup image loaded successfully')}
+                    onError={(e) => {
+                      console.error('Failed to load levelup image:', e);
+                      e.currentTarget.style.display = 'none';
+                    }}
                   />
                 </motion.div>
                 
-                {/* Floating elements */}
+                {/* Floating elements - positioned in empty areas */}
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-4 -right-4 bg-white p-4 rounded-xl shadow-lg border border-gray-200"
+                  className="absolute -top-8 -right-8 bg-white p-4 rounded-xl shadow-lg border border-gray-200 z-20"
                 >
                   <div className="text-center">
                     <div className="text-2xl font-bold text-teal-600">70%</div>
@@ -497,7 +504,7 @@ export default function Home({ onOpenCalculator }: HomeProps) {
                 <motion.div
                   animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute -bottom-4 -left-4 bg-white p-4 rounded-xl shadow-lg border border-gray-200"
+                  className="absolute -bottom-8 -left-8 bg-white p-4 rounded-xl shadow-lg border border-gray-200 z-20"
                 >
                   <div className="text-center">
                     <div className="text-2xl font-bold text-blue-600">24/7</div>
@@ -531,18 +538,23 @@ export default function Home({ onOpenCalculator }: HomeProps) {
                   className="relative z-10"
                 >
                   <img 
-                    src="/future-visions-business-technology-concept.jpg" 
+                    src="https://res.cloudinary.com/ppbal/image/upload/v1755703722/future-visions-business-technology-concept_gomvpw.jpg" 
                     alt="Future vision of business technology and innovation" 
                     className="rounded-2xl shadow-2xl w-full h-auto object-cover"
                     loading="lazy"
+                    onLoad={() => console.log('Future vision image loaded successfully')}
+                    onError={(e) => {
+                      console.error('Failed to load future vision image:', e);
+                      e.currentTarget.style.display = 'none';
+                    }}
                   />
                 </motion.div>
                 
-                {/* Floating elements */}
+                {/* Floating elements - positioned in empty areas */}
                 <motion.div
                   animate={{ rotate: [0, 5, -5, 0] }}
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-4 -left-4 bg-gradient-to-br from-teal-500 to-blue-500 p-4 rounded-xl shadow-lg"
+                  className="absolute -top-8 -left-8 bg-gradient-to-br from-teal-500 to-blue-500 p-4 rounded-xl shadow-lg z-20"
                 >
                   <div className="text-center text-white">
                     <div className="text-2xl font-bold">Innovation</div>
@@ -553,7 +565,7 @@ export default function Home({ onOpenCalculator }: HomeProps) {
                 <motion.div
                   animate={{ scale: [1, 1.05, 1] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                  className="absolute -bottom-4 -right-4 bg-white p-4 rounded-xl shadow-lg border border-gray-200"
+                  className="absolute -bottom-8 -right-8 bg-white p-4 rounded-xl shadow-lg border border-gray-200 z-20"
                 >
                   <div className="text-center">
                     <div className="text-2xl font-bold text-teal-600">Future</div>
