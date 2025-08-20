@@ -134,8 +134,8 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                   }}
                 />
                 <div className="flex flex-col ml-3">
-                  <span className="text-white font-heading font-bold text-sm sm:text-base lg:text-lg">Precise Programming</span>
-                  <span className="text-blue-100 text-xs sm:text-sm -mt-1 hidden sm:block font-body">for Business Advancement & Leverage</span>
+                  <span className="text-white font-heading font-bold text-xs sm:text-sm lg:text-base">Precise Programming</span>
+                  <span className="text-blue-100 text-xs sm:text-xs -mt-1 hidden sm:block font-body">for Business Advancement & Leverage</span>
                 </div>
                 {/* Fallback logo if image doesn't load */}
                 <div className="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center hidden" id="logo-fallback">
@@ -330,14 +330,14 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                       </Button>
                     </div>
                   ) : (
-                    <div className="space-y-2 pt-4 border-t">
+                    <div className="space-y-3 pt-6 border-t border-gray-200">
                       <Link href="/login" onClick={() => setIsOpen(false)}>
-                        <Button variant="outline" className="w-full">
+                        <Button variant="outline" className="w-full py-3">
                           Sign In
                         </Button>
                       </Link>
                       <Link href="/signup" onClick={() => setIsOpen(false)}>
-                        <Button className="w-full bg-blue-600 text-white hover:bg-blue-700">
+                        <Button className="w-full bg-blue-600 text-white hover:bg-blue-700 py-3">
                           Get Started
                         </Button>
                       </Link>

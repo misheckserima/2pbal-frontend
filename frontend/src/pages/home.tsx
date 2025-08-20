@@ -5,7 +5,7 @@ import { Check, X, MessageCircle, ClipboardList, Rocket, TrendingUp, Shield } fr
 import { PACKAGES, CASE_STUDIES } from '@/lib/constants';
 import { useEffect, useState, useRef } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { motion, useInView, useAnimation } from 'framer-motion';
+import { motion, useInView, useAnimation, AnimatePresence } from 'framer-motion';
 import CountingNumbers from '@/components/ui/counting-numbers';
 import { Link } from 'wouter';
 import { HesitationTooltip } from '@/components/ui/smart-tooltip';
@@ -18,9 +18,22 @@ export default function Home({ onOpenCalculator }: HomeProps) {
   const { user, isAuthenticated } = useAuth();
   const [roiVisible, setRoiVisible] = useState(false);
   const [heroTransformed, setHeroTransformed] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const problemRef = useRef(null);
   const solutionRef = useRef(null);
   const trustBarRef = useRef(null);
+  
+  // Background images array
+  const backgroundImages = [
+    "https://res.cloudinary.com/ppbal/image/upload/v1755703910/cover_wmmrdn.jpg",
+    "https://res.cloudinary.com/ppbal/image/upload/v1755705711/dynamic-data-visualization-3d_2_apjoys.jpg",
+    "https://res.cloudinary.com/ppbal/image/upload/v1755705712/african-entrepreneur-start-up-company-reading-charts-documents-paperwork-diverse-team-business-people-analyzing-company-financial-reports-from-computer-successful-corporate-professional-ent_cbit7s.jpg",
+    "https://res.cloudinary.com/ppbal/image/upload/v1755705703/dynamic-data-visualization-3d_1_u0fq3e.jpg",
+    "https://res.cloudinary.com/ppbal/image/upload/v1755705701/index-finger-touching-purple-arrow_xnjmry.jpg",
+    "https://res.cloudinary.com/ppbal/image/upload/v1755705699/business-concept-with-team-close-up_klklah.jpg",
+    "https://res.cloudinary.com/ppbal/image/upload/v1755706321/aerial-view-business-team_iskcfb.jpg",
+    "https://res.cloudinary.com/ppbal/image/upload/v1755706320/smiling-businessman-signing-contract_as5sau.jpg"
+  ];
   
   const problemInView = useInView(problemRef, { once: true });
   const solutionInView = useInView(solutionRef, { once: true });
@@ -53,6 +66,22 @@ export default function Home({ onOpenCalculator }: HomeProps) {
       setRoiVisible(true);
     }
   }, [trustBarInView]);
+
+  // Randomize initial image and rotate images
+  useEffect(() => {
+    // Set random initial image
+    const randomIndex = Math.floor(Math.random() * backgroundImages.length);
+    setCurrentImageIndex(randomIndex);
+    
+    // Rotate images every 8 seconds
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => 
+        (prevIndex + 1) % backgroundImages.length
+      );
+    }, 8000);
+    
+    return () => clearInterval(interval);
+  }, [backgroundImages.length]);
   
   const handlePackageSelect = (packageId: string) => {
     window.location.href = `/package/${packageId}`;
@@ -64,24 +93,38 @@ export default function Home({ onOpenCalculator }: HomeProps) {
 
   return (
     <div className={`${isAuthenticated && !user?.emailVerified ? 'pt-[104px] lg:pt-[120px]' : 'pt-16 lg:pt-20'}`}>
-      {/* Hero Section - Cover Image Style */}
+      {/* Hero Section - Dynamic Background Images */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
+        {/* Dynamic Background Images */}
         <div className="absolute inset-0">
-          <img 
-            src="https://res.cloudinary.com/ppbal/image/upload/v1755703910/cover_wmmrdn.jpg" 
-            alt="Business growth and digital transformation" 
-            className="w-full h-full object-cover"
-            loading="eager"
-            onLoad={() => console.log('Cover image loaded successfully')}
-            onError={(e) => {
-              console.error('Failed to load cover image:', e);
-              // Fallback to a gradient background if image fails to load
-              e.currentTarget.style.display = 'none';
-            }}
-          />
-          {/* Blue overlay for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-blue-800/60"></div>
+          <AnimatePresence mode="wait">
+            <motion.img 
+              key={currentImageIndex}
+              src={backgroundImages[currentImageIndex]}
+              alt="Business growth and digital transformation" 
+              className="w-full h-full object-cover"
+              loading="eager"
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              onLoad={() => console.log('Background image loaded successfully')}
+              onError={(e) => {
+                console.error('Failed to load background image:', e);
+                e.currentTarget.style.display = 'none';
+              }}
+            />
+          </AnimatePresence>
+          
+          {/* Subtle overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-black/20"></div>
+          
+          {/* Cloud-like effect in bottom right corner */}
+          <div className="absolute bottom-0 right-0 w-64 h-64 opacity-30">
+            <div className="absolute bottom-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-xl"></div>
+            <div className="absolute bottom-8 right-8 w-24 h-24 bg-white/15 rounded-full blur-lg"></div>
+            <div className="absolute bottom-16 right-16 w-16 h-16 bg-white/10 rounded-full blur-md"></div>
+          </div>
         </div>
         
         {/* Content */}
@@ -93,9 +136,20 @@ export default function Home({ onOpenCalculator }: HomeProps) {
             transition={{ duration: 0.8 }}
             className="mb-4"
           >
-            <p className="text-blue-100 text-lg sm:text-xl font-body">
+            <motion.p 
+              className="text-white text-sm sm:text-lg lg:text-xl font-body drop-shadow-lg"
+              animate={{ 
+                y: [0, -2, 0],
+                opacity: [1, 0.9, 1]
+              }}
+              transition={{ 
+                duration: 4, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
+            >
               Benefit from our tried and tested solutions.
-            </p>
+            </motion.p>
           </motion.div>
 
           {/* Main headline */}
@@ -105,10 +159,25 @@ export default function Home({ onOpenCalculator }: HomeProps) {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-6"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-tight">
+            <motion.h1 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-white leading-tight drop-shadow-2xl"
+              animate={{ 
+                scale: [1, 1.02, 1],
+                textShadow: [
+                  "0 0 20px rgba(255,255,255,0.3)",
+                  "0 0 30px rgba(255,255,255,0.5)",
+                  "0 0 20px rgba(255,255,255,0.3)"
+                ]
+              }}
+              transition={{ 
+                duration: 6, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
+            >
               <span className="block">GROW YOUR</span>
-              <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl">COMPANY</span>
-            </h1>
+              <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">COMPANY</span>
+            </motion.h1>
           </motion.div>
 
           {/* Subtitle */}
@@ -118,9 +187,20 @@ export default function Home({ onOpenCalculator }: HomeProps) {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mb-8"
           >
-            <p className="text-xl sm:text-2xl lg:text-3xl text-blue-100 font-body">
+            <motion.p 
+              className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-white font-body drop-shadow-lg"
+              animate={{ 
+                x: [0, 2, -2, 0],
+                opacity: [1, 0.95, 1]
+              }}
+              transition={{ 
+                duration: 5, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
+            >
               with digital strategies that work
-            </p>
+            </motion.p>
           </motion.div>
 
           {/* Company name */}
@@ -130,8 +210,8 @@ export default function Home({ onOpenCalculator }: HomeProps) {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mb-8"
           >
-            <p className="text-lg sm:text-xl text-blue-200 font-heading font-semibold">
-              Precise Programming
+            <p className="text-sm sm:text-lg lg:text-xl text-white font-heading font-semibold drop-shadow-lg">
+              Precise Programming for Business Advancement & Leverage
             </p>
           </motion.div>
 
@@ -182,6 +262,8 @@ export default function Home({ onOpenCalculator }: HomeProps) {
       <section className="py-12 sm:py-16 lg:py-20 bg-white relative">
         {/* Add top margin to prevent overlap with floating elements */}
         <div className="absolute top-0 left-0 right-0 h-16 bg-white"></div>
+        {/* Mobile padding fix */}
+        <div className="pt-8 sm:pt-0"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Main Content - 8 columns on desktop, full width on mobile */}
