@@ -362,15 +362,6 @@ export type PackageViewTracking = typeof packageViewTracking.$inferSelect;
 
 // Insert schemas
 export const insertUserSchema = createInsertSchema(users).omit({
-=======
-export type InsertEmailVerificationToken = any;
-export type EmailVerificationToken = typeof emailVerificationTokens.$inferSelect;
-export type InsertPackageViewTracking = any;
-export type PackageViewTracking = typeof packageViewTracking.$inferSelect;
-
-// Insert schemas
-export const insertUserSchema = createInsertSchema(users).omit({ // @ts-ignore
->>>>>>> 4db41466bd558f97ee380bcefa1ced94e68f6854
   id: true,
   createdAt: true,
   updatedAt: true,
@@ -390,11 +381,7 @@ export const insertProjectSchema = createInsertSchema(userProjects).omit({
 
 // Types
 export type User = typeof users.$inferSelect;
-<<<<<<< HEAD
 export type InsertUser = z.infer<typeof insertUserSchema>;
-=======
-export type InsertUser = any;
->>>>>>> 4db41466bd558f97ee380bcefa1ced94e68f6854
 export type LoginData = z.infer<typeof loginSchema>;
 export type SignupData = z.infer<typeof signupSchema>;
 export type ProfileUpdate = z.infer<typeof profileUpdateSchema>;
@@ -408,12 +395,6 @@ export type AccountDeletion = z.infer<typeof accountDeletionSchema>;
 export type EmailVerificationData = z.infer<typeof emailVerificationSchema>;
 export type PackageRecommendation = z.infer<typeof packageRecommendationSchema>;
 export type Quote = typeof quotes.$inferSelect;
-<<<<<<< HEAD
 export type InsertQuote = z.infer<typeof insertQuoteSchema>;
 export type UserProject = typeof userProjects.$inferSelect;
 export type InsertProject = z.infer<typeof insertProjectSchema>;
-=======
-export type InsertQuote = any;
-export type UserProject = typeof userProjects.$inferSelect;
-export type InsertProject = any;
->>>>>>> 4db41466bd558f97ee380bcefa1ced94e68f6854
