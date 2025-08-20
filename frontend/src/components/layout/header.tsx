@@ -116,20 +116,22 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
         </div>
       )}
       
-      <header className={`bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100 fixed w-full z-40 ${isAuthenticated && !user?.emailVerified ? 'top-10' : 'top-0'}`}>
+      <header className={`bg-gradient-to-r from-blue-900/95 to-blue-800/95 backdrop-blur-md shadow-lg border-b border-blue-700/30 fixed w-full z-40 ${isAuthenticated && !user?.emailVerified ? 'top-10' : 'top-0'}`}>
       <nav className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
         <div className="flex justify-between items-center h-16 lg:h-20">
           <div className="flex items-center min-w-0 flex-1">
-            <Link href="/" className="flex items-center group mr-4 lg:mr-8 flex-shrink-0">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center">
-                <Code className="h-6 w-6 sm:h-8 sm:w-8 lg:h-10 lg:w-10 text-white" />
-              </div>
-              <div className="flex flex-col ml-3">
-                <span className="text-gray-900 font-bold text-sm sm:text-base lg:text-lg">Precise Programming</span>
-                <span className="text-xs sm:text-sm text-gray-600 -mt-1 hidden sm:block">for Business Advancement & Leverage</span>
-              </div>
-            </Link>
-            <span className="text-xs sm:text-sm text-gray-600 font-medium hidden xl:block truncate ml-4">
+                          <Link href="/" className="flex items-center group mr-4 lg:mr-8 flex-shrink-0">
+                <img 
+                  src="/2pbal_logo.png" 
+                  alt="2PBAL Logo" 
+                  className="h-10 w-auto sm:h-12 lg:h-16 object-contain" 
+                />
+                <div className="flex flex-col ml-3">
+                  <span className="text-white font-heading font-bold text-sm sm:text-base lg:text-lg">Precise Programming</span>
+                  <span className="text-blue-100 text-xs sm:text-sm -mt-1 hidden sm:block font-body">for Business Advancement & Leverage</span>
+                </div>
+              </Link>
+            <span className="text-xs sm:text-sm text-blue-100 font-medium hidden xl:block truncate ml-4">
               Enterprise Results, Without Enterprise Costs
             </span>
           </div>
@@ -139,10 +141,10 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`font-medium transition-colors text-xs xl:text-sm whitespace-nowrap px-3 py-2 rounded-lg hover:bg-gray-100 ${
+                className={`font-medium transition-colors text-xs xl:text-sm whitespace-nowrap px-3 py-2 rounded-lg hover:bg-blue-700/50 ${
                   location === item.href 
-                    ? 'text-teal-600 bg-teal-50 border border-teal-200' 
-                    : 'text-gray-700 hover:text-teal-600'
+                    ? 'text-white bg-blue-700/50 border border-blue-500' 
+                    : 'text-blue-100 hover:text-white'
                 }`}
               >
                 <span className="xl:hidden">{item.name.split(' ')[0]}</span>
@@ -192,10 +194,10 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
             </motion.div>
             
             <ContactPopup>
-              <Button 
-                className="bg-gray-100 text-gray-700 hover:bg-gray-200 text-xs px-3 py-2 whitespace-nowrap ml-2"
-                size="sm"
-              >
+                              <Button 
+                  className="bg-blue-700/50 text-white hover:bg-blue-600 text-xs px-3 py-2 whitespace-nowrap ml-2 border border-blue-500"
+                  size="sm"
+                >
                 <Mail className="h-3 w-3 mr-1" />
                 <span className="xl:hidden">Contact</span>
                 <span className="hidden xl:inline">Contact</span>
@@ -206,7 +208,7 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
             {isAuthenticated ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="text-gray-700 hover:text-teal-600 text-xs px-3 py-2" size="sm">
+                  <Button variant="ghost" className="text-blue-100 hover:text-white text-xs px-3 py-2" size="sm">
                     <User className="h-3 w-3 mr-1" />
                     <span className="hidden xl:inline">{user?.firstName || 'Account'}</span>
                   </Button>
@@ -242,13 +244,13 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
             ) : (
               <div className="flex items-center space-x-2">
                 <Link href="/login">
-                  <Button variant="ghost" className="text-gray-700 hover:text-teal-600 text-xs px-3 py-2" size="sm">
+                  <Button variant="ghost" className="text-blue-100 hover:text-white text-xs px-3 py-2" size="sm">
                     <span className="xl:hidden">Login</span>
                     <span className="hidden xl:inline">Sign In</span>
                   </Button>
                 </Link>
                 <Link href="/signup">
-                  <Button className="bg-teal-600 text-white hover:bg-teal-700 text-xs px-3 py-2" size="sm">
+                  <Button className="bg-blue-600 text-white hover:bg-blue-700 text-xs px-3 py-2" size="sm">
                     <span className="xl:hidden">Start</span>
                     <span className="hidden xl:inline">Get Started</span>
                   </Button>
@@ -261,14 +263,14 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="p-2 min-h-[44px] min-w-[44px]">
-                  <Menu className="h-6 w-6 text-gray-700" />
+                  <Menu className="h-6 w-6 text-white" />
                 </Button>
               </SheetTrigger>
               <SheetContent className="w-[280px] sm:w-[320px]">
                 <div className="flex flex-col space-y-2 mt-8">
                   <Link
                     href="/"
-                    className="flex items-center space-x-3 font-medium text-lg text-gray-700 hover:text-teal-600 transition-colors p-3 rounded-lg hover:bg-gray-50"
+                    className="flex items-center space-x-3 font-medium text-lg text-gray-700 hover:text-blue-600 transition-colors p-3 rounded-lg hover:bg-gray-50"
                     onClick={() => setIsOpen(false)}
                   >
                     <Home className="h-5 w-5" />
@@ -280,8 +282,8 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                       href={item.href}
                       className={`font-medium text-lg transition-colors p-3 rounded-lg hover:bg-gray-50 ${
                         location === item.href 
-                          ? 'text-teal-600 bg-teal-50 border border-teal-200' 
-                          : 'text-gray-700 hover:text-teal-600'
+                          ? 'text-blue-600 bg-blue-50 border border-blue-200' 
+                          : 'text-gray-700 hover:text-blue-600'
                       }`}
                       onClick={() => setIsOpen(false)}
                     >
@@ -324,7 +326,7 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                         </Button>
                       </Link>
                       <Link href="/signup" onClick={() => setIsOpen(false)}>
-                        <Button className="w-full bg-teal-600 text-white hover:bg-teal-700">
+                        <Button className="w-full bg-blue-600 text-white hover:bg-blue-700">
                           Get Started
                         </Button>
                       </Link>

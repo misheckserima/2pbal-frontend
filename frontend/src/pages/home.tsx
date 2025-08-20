@@ -64,117 +64,112 @@ export default function Home({ onOpenCalculator }: HomeProps) {
 
   return (
     <div className={`${isAuthenticated && !user?.emailVerified ? 'pt-[104px] lg:pt-[120px]' : 'pt-16 lg:pt-20'}`}>
-      {/* Hero Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 via-white to-teal-50 relative overflow-hidden">
-        {/* Animated background elements */}
+      {/* Hero Section - Cover Image Style */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
         <div className="absolute inset-0">
-          <motion.div
-            animate={{ 
-              rotate: [0, 360],
-              scale: [1, 1.1, 1]
-            }}
-            transition={{ 
-              duration: 20, 
-              repeat: Infinity, 
-              ease: "linear" 
-            }}
-            className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-teal-200 to-blue-200 rounded-full opacity-20 blur-xl"
+          <img 
+            src="/cover.jpg" 
+            alt="Business growth and digital transformation" 
+            className="w-full h-full object-cover"
+            loading="eager"
           />
-          <motion.div
-            animate={{ 
-              rotate: [360, 0],
-              scale: [1, 1.2, 1]
-            }}
-            transition={{ 
-              duration: 25, 
-              repeat: Infinity, 
-              ease: "linear" 
-            }}
-            className="absolute bottom-10 left-10 w-24 h-24 bg-gradient-to-br from-blue-200 to-teal-200 rounded-full opacity-20 blur-xl"
-          />
+          {/* Blue overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-blue-800/60"></div>
         </div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            {/* Main Headline */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="mb-6"
-            >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                <span className="block">Full-Time Platform</span>
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-blue-600">
-                  Dedicated to Your Success
-                </span>
-              </h1>
-            </motion.div>
+        {/* Content */}
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Top small text */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mb-4"
+          >
+            <p className="text-blue-100 text-lg sm:text-xl font-body">
+              Benefit from our tried and tested solutions.
+            </p>
+          </motion.div>
 
-            {/* Purpose Statement */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-8 leading-relaxed"
-            >
-              We <span className="font-semibold text-teal-600">plan</span>, <span className="font-semibold text-teal-600">create</span>, <span className="font-semibold text-teal-600">grow</span>, and <span className="font-semibold text-teal-600">market</span> your business with packaged digital services that are affordable and include free business consulting.
-            </motion.p>
+          {/* Main headline */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-6"
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-tight">
+              <span className="block">GROW YOUR</span>
+              <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl">COMPANY</span>
+            </h1>
+          </motion.div>
 
-            {/* Key Benefits */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
-            >
-              {[
-                { icon: "🎯", text: "Strategic Planning" },
-                { icon: "💡", text: "Creative Solutions" },
-                { icon: "📈", text: "Growth Marketing" },
-                { icon: "💼", text: "Free Consulting" }
-              ].map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300"
-                >
-                  <div className="text-2xl mb-2">{benefit.icon}</div>
-                  <div className="text-sm font-medium text-gray-700">{benefit.text}</div>
-                </motion.div>
-              ))}
-            </motion.div>
+          {/* Subtitle */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mb-8"
+          >
+            <p className="text-xl sm:text-2xl lg:text-3xl text-blue-100 font-body">
+              with digital strategies that work
+            </p>
+          </motion.div>
 
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          {/* Company name */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mb-8"
+          >
+            <p className="text-lg sm:text-xl text-blue-200 font-heading font-semibold">
+              Precise Programming
+            </p>
+          </motion.div>
+
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            <Button
+              onClick={() => {
+                setHeroTransformed(true);
+                setTimeout(() => onOpenCalculator(), 800);
+              }}
+              size="lg"
+              className="bg-white text-blue-900 hover:bg-blue-50 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 font-heading"
             >
-              <Button
-                onClick={() => {
-                  setHeroTransformed(true);
-                  setTimeout(() => onOpenCalculator(), 800);
-                }}
-                size="lg"
-                className="bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              >
-                Get Free Consultation
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={scrollToPackages}
-                className="border-2 border-teal-600 text-teal-600 hover:bg-teal-600 hover:text-white px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105"
-              >
-                View Packages
-              </Button>
-            </motion.div>
-          </div>
+              Get Free Consultation
+            </Button>
+          </motion.div>
         </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.2 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="text-white text-center"
+          >
+            <div className="text-sm font-body mb-2">Scroll to explore</div>
+            <div className="w-6 h-10 border-2 border-white rounded-full mx-auto flex justify-center">
+              <motion.div
+                animate={{ y: [0, 12, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="w-1 h-3 bg-white rounded-full mt-2"
+              />
+            </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Stop Overpaying Section */}
