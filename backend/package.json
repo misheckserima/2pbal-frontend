@@ -4,10 +4,11 @@
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development tsx index.ts",
-    "build": "tsc",
+    "build": "tsc && npm run copy-shared",
     "start": "NODE_ENV=production node dist/backend/index.js",
     "db:push": "drizzle-kit push",
-    "db:setup": "node setup-database.js"
+    "db:setup": "node setup-database.js",
+    "copy-shared": "node -e \"const fs=require('fs');const path=require('path');if(fs.existsSync('../shared/schema.js')){fs.copyFileSync('../shared/schema.js','dist/shared/schema.js');console.log('Copied shared schema to dist/shared/');}else{console.log('shared/schema.js not found');}\""
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
