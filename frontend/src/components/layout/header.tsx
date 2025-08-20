@@ -125,10 +125,21 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                   src="/2pbal_logo.png" 
                   alt="2PBAL Logo" 
                   className="h-10 w-auto sm:h-12 lg:h-16 object-contain" 
+                  onLoad={() => console.log('Logo loaded successfully')}
+                  onError={(e) => {
+                    console.error('Failed to load logo:', e);
+                    // Fallback to text if logo fails to load
+                    e.currentTarget.style.display = 'none';
+                    document.getElementById('logo-fallback')?.classList.remove('hidden');
+                  }}
                 />
                 <div className="flex flex-col ml-3">
                   <span className="text-white font-heading font-bold text-sm sm:text-base lg:text-lg">Precise Programming</span>
                   <span className="text-blue-100 text-xs sm:text-sm -mt-1 hidden sm:block font-body">for Business Advancement & Leverage</span>
+                </div>
+                {/* Fallback logo if image doesn't load */}
+                <div className="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center hidden" id="logo-fallback">
+                  <span className="text-white font-bold text-xs sm:text-sm lg:text-base">2P</span>
                 </div>
               </Link>
             <span className="text-xs sm:text-sm text-blue-100 font-medium hidden xl:block truncate ml-4">

@@ -73,6 +73,12 @@ export default function Home({ onOpenCalculator }: HomeProps) {
             alt="Business growth and digital transformation" 
             className="w-full h-full object-cover"
             loading="eager"
+            onLoad={() => console.log('Cover image loaded successfully')}
+            onError={(e) => {
+              console.error('Failed to load cover image:', e);
+              // Fallback to a gradient background if image fails to load
+              e.currentTarget.style.display = 'none';
+            }}
           />
           {/* Blue overlay for better text readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-blue-800/60"></div>
