@@ -77,12 +77,12 @@ export default function Home({ onOpenCalculator }: HomeProps) {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Main Content - 8 columns */}
+            {/* Main Content - 8 columns on desktop, full width on mobile */}
             <motion.div 
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-gray-900 order-2 lg:order-1 lg:col-span-8"
+              className="text-gray-900 lg:col-span-8"
             >
               {/* Dynamic Headline with staggered animation */}
               <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
@@ -252,12 +252,12 @@ export default function Home({ onOpenCalculator }: HomeProps) {
               </motion.div>
             </motion.div>
 
-            {/* The Value Stack - 4 columns */}
+            {/* The Value Stack - 4 columns on desktop, appears after main content on mobile */}
             <motion.div 
               initial={{ opacity: 0, x: 50, scale: 0.9 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               transition={{ duration: 1, delay: 1.5, ease: "backOut" }}
-              className="order-1 lg:order-2 lg:col-span-4 space-y-4"
+              className="lg:col-span-4 space-y-4 mt-8 lg:mt-0"
             >
               {/* ROI Statement with parallax effect */}
               <motion.div

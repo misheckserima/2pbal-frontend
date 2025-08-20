@@ -126,11 +126,11 @@ export default function ClientPortal({ onOpenCalculator }: ClientPortalProps) {
       <section className="py-6 sm:py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <Tabs defaultValue="overview" className="space-y-4 sm:space-y-6">
-            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 h-auto">
-              <TabsTrigger value="overview" className="text-xs sm:text-sm px-2 sm:px-4 py-2">Overview</TabsTrigger>
-              <TabsTrigger value="progress" className="text-xs sm:text-sm px-2 sm:px-4 py-2">Progress</TabsTrigger>
-              <TabsTrigger value="payments" className="text-xs sm:text-sm px-2 sm:px-4 py-2">Payments</TabsTrigger>
-              <TabsTrigger value="communication" className="text-xs sm:text-sm px-2 sm:px-4 py-2">Updates</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 h-auto gap-1 sm:gap-2">
+              <TabsTrigger value="overview" className="text-sm sm:text-base px-3 sm:px-4 py-3 sm:py-2 font-medium">Overview</TabsTrigger>
+              <TabsTrigger value="progress" className="text-sm sm:text-base px-3 sm:px-4 py-3 sm:py-2 font-medium">Progress</TabsTrigger>
+              <TabsTrigger value="payments" className="text-sm sm:text-base px-3 sm:px-4 py-3 sm:py-2 font-medium">Payments</TabsTrigger>
+              <TabsTrigger value="communication" className="text-sm sm:text-base px-3 sm:px-4 py-3 sm:py-2 font-medium">Updates</TabsTrigger>
             </TabsList>
 
             {/* Overview Tab */}

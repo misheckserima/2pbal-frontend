@@ -257,15 +257,15 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
           <div className="lg:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="p-1">
-                  <Menu className="h-5 w-5 text-white" />
+                <Button variant="ghost" size="icon" className="p-2 min-h-[44px] min-w-[44px]">
+                  <Menu className="h-6 w-6 text-white" />
                 </Button>
               </SheetTrigger>
-              <SheetContent>
-                <div className="flex flex-col space-y-4 mt-6">
+              <SheetContent className="w-[280px] sm:w-[320px]">
+                <div className="flex flex-col space-y-2 mt-8">
                   <Link
                     href="/"
-                    className="flex items-center space-x-2 font-medium text-lg text-gray-dark hover:text-teal-primary transition-colors"
+                    className="flex items-center space-x-3 font-medium text-lg text-gray-dark hover:text-teal-primary transition-colors p-3 rounded-lg hover:bg-gray-50"
                     onClick={() => setIsOpen(false)}
                   >
                     <Home className="h-5 w-5" />
@@ -275,9 +275,9 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className={`font-medium text-lg transition-colors ${
+                      className={`font-medium text-lg transition-colors p-3 rounded-lg hover:bg-gray-50 ${
                         location === item.href 
-                          ? 'text-teal-primary' 
+                          ? 'text-teal-primary bg-teal-50' 
                           : 'text-gray-dark hover:text-teal-primary'
                       }`}
                       onClick={() => setIsOpen(false)}
