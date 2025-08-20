@@ -8,6 +8,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "outDir": "./dist",
+    "rootDir": ".",
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
@@ -16,9 +17,9 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "@shared/*": ["./shared/*"]
+      "@shared/*": ["../shared/*"]
     }
   },
-  "include": ["**/*.ts"],
-  "exclude": ["node_modules", "dist", "client/**/*", "frontend/**/*"]
+  "include": ["*.ts", "../shared/**/*.ts"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
 }
