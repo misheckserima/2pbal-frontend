@@ -281,11 +281,7 @@ export const changePasswordSchema = z.object({
 
 export const accountDeletionSchema = z.object({
   password: z.string().min(6, "Password is required to delete account"),
-<<<<<<< HEAD
   confirmation: z.literal("DELETE"),
-=======
-  confirmation: z.literal("DELETE").refine(val => val === "DELETE", { message: "Please type DELETE to confirm" }),
->>>>>>> 4db41466bd558f97ee380bcefa1ced94e68f6854
 });
 
 export const emailVerificationSchema = z.object({
@@ -299,11 +295,7 @@ export const createPaymentIntentSchema = z.object({
   serviceId: z.string().optional(),
   planId: z.string().optional(),
   description: z.string().optional(),
-<<<<<<< HEAD
   metadata: z.record(z.string(), z.unknown()).optional(),
-=======
-  metadata: z.record(z.string(), z.string()).optional(),
->>>>>>> 4db41466bd558f97ee380bcefa1ced94e68f6854
 });
 
 export const createSubscriptionSchema = z.object({
@@ -343,19 +335,11 @@ export const insertInvoiceSchema = createInsertSchema(invoices).omit({
 });
 
 // Types
-<<<<<<< HEAD
 export type InsertPayment = z.infer<typeof insertPaymentSchema>;
 export type Payment = typeof payments.$inferSelect;
 export type InsertSubscription = z.infer<typeof insertSubscriptionSchema>;
 export type Subscription = typeof subscriptions.$inferSelect;
 export type InsertInvoice = z.infer<typeof insertInvoiceSchema>;
-=======
-export type InsertPayment = any;
-export type Payment = typeof payments.$inferSelect;
-export type InsertSubscription = any;
-export type Subscription = typeof subscriptions.$inferSelect;
-export type InsertInvoice = any;
->>>>>>> 4db41466bd558f97ee380bcefa1ced94e68f6854
 export type Invoice = typeof invoices.$inferSelect;
 
 // Insert schemas for new tables
@@ -371,7 +355,6 @@ export const insertPackageViewTrackingSchema = createInsertSchema(packageViewTra
 });
 
 // Types for new tables
-<<<<<<< HEAD
 export type InsertEmailVerificationToken = z.infer<typeof insertEmailVerificationTokenSchema>;
 export type EmailVerificationToken = typeof emailVerificationTokens.$inferSelect;
 export type InsertPackageViewTracking = z.infer<typeof insertPackageViewTrackingSchema>;
