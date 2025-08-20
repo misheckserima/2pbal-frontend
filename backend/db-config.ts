@@ -13,7 +13,11 @@ import { Pool, neonConfig } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-serverless';
 // @ts-ignore - ws module types not available
 import ws from "ws";
+<<<<<<< HEAD
 import * as schema from "../shared/schema";
+=======
+import * as schema from "./shared/schema";
+>>>>>>> d2b0f008736008fefc8c80f4e1574258187d6081
 
 // Configure WebSocket constructor for Neon
 neonConfig.webSocketConstructor = ws;

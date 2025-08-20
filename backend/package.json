@@ -13,10 +13,17 @@
     "@sendgrid/mail": "^8.1.4",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.5.1",
+<<<<<<< HEAD
     "connect-pg-simple": "^9.0.1",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.38.4",
+=======
+    "dotenv": "^16.4.5",
+    "connect-pg-simple": "^9.0.1",
+    "cookie-parser": "^1.4.7",
+    "drizzle-orm": "^0.38.2",
+>>>>>>> d2b0f008736008fefc8c80f4e1574258187d6081
     "drizzle-zod": "^0.5.1",
     "express": "^4.21.1",
     "express-session": "^1.18.1",

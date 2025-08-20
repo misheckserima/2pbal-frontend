@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { ProfileUpdate, PackageRecommendation } from "../shared/schema.js";
+=======
+import { ProfileUpdate, PackageRecommendation } from "./shared/schema.js";
+>>>>>>> d2b0f008736008fefc8c80f4e1574258187d6081
 
 interface PackageDefinition {
   id: string;

@@ -23,7 +23,11 @@
     },
     {
       "src": "/(.*)",
+<<<<<<< HEAD
       "dest": "/frontend/dist/index.html"
+=======
+      "dest": "/frontend/dist/$1"
+>>>>>>> d2b0f008736008fefc8c80f4e1574258187d6081
     }
   ]
 }
