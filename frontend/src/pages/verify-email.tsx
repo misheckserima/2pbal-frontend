@@ -26,7 +26,8 @@ export default function VerifyEmail() {
       }
 
       try {
-        const response = await fetch(`/api/auth/verify-email?token=${token}`);
+        const apiUrl = import.meta.env.VITE_API_URL || 'https://twopbal-backend.onrender.com';
+        const response = await fetch(`${apiUrl}/api/auth/verify-email?token=${token}`);
         const data = await response.json();
 
         if (response.ok) {
@@ -58,7 +59,8 @@ export default function VerifyEmail() {
   const handleResendVerification = async () => {
     setIsResending(true);
     try {
-      const response = await fetch('/api/auth/resend-verification', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://twopbal-backend.onrender.com';
+      const response = await fetch(`${apiUrl}/api/auth/resend-verification`, {
         method: 'POST',
         credentials: 'include'
       });

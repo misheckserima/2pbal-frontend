@@ -141,7 +141,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const verificationToken = await storage.createEmailVerificationToken(user.id, user.email);
       
       // Send verification email
-      const verificationLink = `${req.protocol}://${req.get('host')}/verify-email?token=${verificationToken.token}`;
+      const verificationLink = `https://www.2pbal.online/verify-email?token=${verificationToken.token}`;
       const emailHTML = generateVerificationEmailHTML(user.firstName || 'there', verificationLink);
       
       const emailSent = await sendEmail({
@@ -264,7 +264,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const verificationToken = await storage.createEmailVerificationToken(req.user.id, req.user.email);
       
       // Send verification email
-      const verificationLink = `${req.protocol}://${req.get('host')}/verify-email?token=${verificationToken.token}`;
+      const verificationLink = `https://www.2pbal.online/verify-email?token=${verificationToken.token}`;
       const emailHTML = generateVerificationEmailHTML(req.user.firstName || 'there', verificationLink);
       
       const emailSent = await sendEmail({
