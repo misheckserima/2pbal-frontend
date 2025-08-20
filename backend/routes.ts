@@ -167,7 +167,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
 
       // Return user without password
-      const { password: _, ...userWithoutPassword } = user;
+      const { password, ...userWithoutPassword } = user;
       res.status(201).json({ 
         user: userWithoutPassword,
         message: emailSent ? 'Account created! Please check your email to verify your account.' : 'Account created! Please contact support if you need to verify your email.'
@@ -202,7 +202,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
 
       // Return user without password
-      const { password: _, ...userWithoutPassword } = user;
+      const { password, ...userWithoutPassword } = user;
       res.json({ user: userWithoutPassword });
     } catch (error) {
       console.error("Login error:", error);
@@ -439,7 +439,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "User not found" });
       }
 
-      const { password: _, ...userWithoutPassword } = updatedUser;
+      const { password, ...userWithoutPassword } = updatedUser;
       res.json({ 
         user: userWithoutPassword,
         recommendation: recommendation
@@ -489,7 +489,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "User not found" });
       }
 
-      const { password: _, ...userWithoutPassword } = updatedUser;
+      const { password, ...userWithoutPassword } = updatedUser;
       res.json({ user: userWithoutPassword });
     } catch (error) {
       console.error("Avatar update error:", error);
@@ -510,7 +510,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "User not found" });
       }
 
-      const { password: _, ...userWithoutPassword } = updatedUser;
+      const { password, ...userWithoutPassword } = updatedUser;
       res.json({ user: userWithoutPassword });
     } catch (error) {
       console.error("Preferences update error:", error);
@@ -604,7 +604,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/admin/users", requireAuth, requireAdmin, async (_req: any, res) => {
     try {
       const users = await storage.getAllUsers();
-      const usersWithoutPasswords = users.map(({ password: _, ...user }) => user);
+      const usersWithoutPasswords = users.map(({ password, ...user }) => user);
       res.json({ users: usersWithoutPasswords });
     } catch (error) {
       console.error("Get all users error:", error);
@@ -648,7 +648,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         userAgent: req.get('User-Agent')
       });
 
-      const { password: _, ...userWithoutPassword } = updatedUser;
+      const { password, ...userWithoutPassword } = updatedUser;
       res.json({ user: userWithoutPassword });
     } catch (error) {
       console.error("Update user role error:", error);
@@ -680,7 +680,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         userAgent: req.get('User-Agent')
       });
 
-      const { password: _, ...userWithoutPassword } = updatedUser;
+      const { password, ...userWithoutPassword } = updatedUser;
       res.json({ user: userWithoutPassword });
     } catch (error) {
       console.error("Update user status error:", error);
@@ -1404,7 +1404,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Enrich with user data
       const enrichedSubscriptions = await Promise.all(
-        allSubscriptions.map(async (subscription) => {
+        allSubscriptions.map(async (subscription: any) => {
           const user = await storage.getUser(subscription.userId);
           return {
             ...subscription,
