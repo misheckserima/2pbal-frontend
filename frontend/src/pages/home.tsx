@@ -70,7 +70,7 @@ export default function Home({ onOpenCalculator }: HomeProps) {
     const randomIndex = Math.floor(Math.random() * backgroundImages.length);
     setCurrentImageIndex(randomIndex);
     
-    // Rotate images every 6 seconds with specific transition sequence
+    // Rotate images every 11 seconds with specific transition sequence
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => {
         const nextIndex = (prevIndex + 1) % backgroundImages.length;
@@ -86,7 +86,7 @@ export default function Home({ onOpenCalculator }: HomeProps) {
         
         return nextIndex;
       });
-    }, 6000);
+    }, 11000);
     
     return () => clearInterval(interval);
   }, [backgroundImages.length]);
@@ -102,10 +102,9 @@ export default function Home({ onOpenCalculator }: HomeProps) {
   return (
     <div className={`${isAuthenticated && !user?.emailVerified ? 'pt-[104px] lg:pt-[120px]' : 'pt-16 lg:pt-20'}`}>
       {/* Hero Section - Dynamic Background Images */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Dynamic Background Images - Reduced width */}
-        <div className="absolute inset-0 flex justify-center">
-          <div className="w-full max-w-6xl h-full">
+      <section className="relative h-[80vh] sm:h-screen flex items-center justify-center overflow-hidden">
+        {/* Dynamic Background Images */}
+        <div className="absolute inset-0">
           <AnimatePresence mode="wait">
             <motion.img 
               key={currentImageIndex}
@@ -136,7 +135,6 @@ export default function Home({ onOpenCalculator }: HomeProps) {
               }}
             />
           </AnimatePresence>
-          </div>
           
           {/* Subtle overlay for better text readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-black/20"></div>

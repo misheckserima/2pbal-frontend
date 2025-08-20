@@ -116,7 +116,7 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
         </div>
       )}
       
-      <header className={`bg-gradient-to-r from-blue-900/95 to-blue-800/95 backdrop-blur-md shadow-lg border-b border-blue-700/30 fixed w-full z-40 ${isAuthenticated && !user?.emailVerified ? 'top-10' : 'top-0'}`}>
+      <header className={`bg-gradient-to-r from-blue-900/95 to-blue-800/95 sm:bg-gradient-to-r sm:from-blue-900/95 sm:to-blue-800/95 bg-transparent backdrop-blur-md shadow-lg border-b border-blue-700/30 fixed w-full z-40 ${isAuthenticated && !user?.emailVerified ? 'top-10' : 'top-0'}`}>
       <nav className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
         <div className="flex justify-between items-center h-16 lg:h-20">
           <div className="flex items-center min-w-0 flex-1">
@@ -134,8 +134,8 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                   }}
                 />
                 <div className="flex flex-col ml-3">
-                  <span className="text-white font-heading font-bold text-xs sm:text-sm lg:text-base">Precise Programming</span>
-                  <span className="text-blue-100 text-xs sm:text-xs -mt-1 hidden sm:block font-body">for Business Advancement & Leverage</span>
+                  <span className="text-white font-heading font-bold text-xs sm:text-sm lg:text-base drop-shadow-lg">Precise Programming</span>
+                  <span className="text-blue-100 text-xs sm:text-xs -mt-1 hidden sm:block font-body drop-shadow-lg">for Business Advancement & Leverage</span>
                 </div>
                 {/* Fallback logo if image doesn't load */}
                 <div className="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center hidden" id="logo-fallback">
@@ -152,7 +152,7 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`font-medium transition-colors text-xs xl:text-sm whitespace-nowrap px-3 py-2 rounded-lg hover:bg-blue-700/50 ${
+                className={`font-medium transition-colors text-xs xl:text-sm whitespace-nowrap px-3 py-2 rounded-lg hover:bg-blue-700/50 drop-shadow-lg ${
                   location === item.href 
                     ? 'text-white bg-blue-700/50 border border-blue-500' 
                     : 'text-blue-100 hover:text-white'
@@ -273,15 +273,19 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
           <div className="lg:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="p-2 min-h-[44px] min-w-[44px]">
-                  <Menu className="h-6 w-6 text-white" />
+                <Button variant="ghost" size="icon" className="p-2 min-h-[44px] min-w-[44px] text-white hover:bg-white/20 backdrop-blur-sm rounded-xl border border-white/20">
+                  <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent className="w-[280px] sm:w-[320px]">
-                <div className="flex flex-col space-y-2 mt-8">
+              <SheetContent className="w-[280px] sm:w-[320px] bg-white/95 backdrop-blur-xl border-l border-gray-200/50">
+                <div className="flex flex-col space-y-3 mt-8">
                   <Link
                     href="/"
-                    className="flex items-center space-x-3 font-medium text-lg text-gray-700 hover:text-blue-600 transition-colors p-3 rounded-lg hover:bg-gray-50"
+                    className={`flex items-center space-x-3 font-semibold text-lg transition-all duration-200 p-4 rounded-xl shadow-sm ${
+                      location === '/' 
+                        ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg' 
+                        : 'text-gray-700 hover:bg-gray-50 hover:shadow-md border border-gray-100'
+                    }`}
                     onClick={() => setIsOpen(false)}
                   >
                     <Home className="h-5 w-5" />
@@ -291,10 +295,10 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className={`font-medium text-lg transition-colors p-3 rounded-lg hover:bg-gray-50 ${
+                      className={`font-semibold text-lg transition-all duration-200 p-4 rounded-xl shadow-sm ${
                         location === item.href 
-                          ? 'text-blue-600 bg-blue-50 border border-blue-200' 
-                          : 'text-gray-700 hover:text-blue-600'
+                          ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg' 
+                          : 'text-gray-700 hover:bg-gray-50 hover:shadow-md border border-gray-100'
                       }`}
                       onClick={() => setIsOpen(false)}
                     >
@@ -330,14 +334,14 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                       </Button>
                     </div>
                   ) : (
-                    <div className="space-y-3 pt-6 border-t border-gray-200">
+                    <div className="space-y-4 pt-8 border-t border-gray-200">
                       <Link href="/login" onClick={() => setIsOpen(false)}>
-                        <Button variant="outline" className="w-full py-3">
+                        <Button variant="outline" className="w-full py-4 font-semibold rounded-xl border-2 hover:bg-gray-50">
                           Sign In
                         </Button>
                       </Link>
                       <Link href="/signup" onClick={() => setIsOpen(false)}>
-                        <Button className="w-full bg-blue-600 text-white hover:bg-blue-700 py-3">
+                        <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 py-4 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
                           Get Started
                         </Button>
                       </Link>
