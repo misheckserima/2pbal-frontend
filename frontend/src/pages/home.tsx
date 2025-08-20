@@ -65,17 +65,121 @@ export default function Home({ onOpenCalculator }: HomeProps) {
   return (
     <div className={`${isAuthenticated && !user?.emailVerified ? 'pt-[104px] lg:pt-[120px]' : 'pt-16 lg:pt-20'}`}>
       {/* Hero Section */}
-      <section className="py-8 sm:py-12 lg:py-16 bg-white relative overflow-hidden">
-        {/* Subtle animated background */}
-        <div className="absolute inset-0 opacity-5">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 via-white to-teal-50 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0">
           <motion.div
-            animate={{ x: [0, 20, 0] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="w-full h-full bg-gradient-to-br from-blue-600 via-teal-500 to-lime-400"
+            animate={{ 
+              rotate: [0, 360],
+              scale: [1, 1.1, 1]
+            }}
+            transition={{ 
+              duration: 20, 
+              repeat: Infinity, 
+              ease: "linear" 
+            }}
+            className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-teal-200 to-blue-200 rounded-full opacity-20 blur-xl"
+          />
+          <motion.div
+            animate={{ 
+              rotate: [360, 0],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{ 
+              duration: 25, 
+              repeat: Infinity, 
+              ease: "linear" 
+            }}
+            className="absolute bottom-10 left-10 w-24 h-24 bg-gradient-to-br from-blue-200 to-teal-200 rounded-full opacity-20 blur-xl"
           />
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-4xl mx-auto">
+            {/* Main Headline */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="mb-6"
+            >
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                <span className="block">Full-Time Platform</span>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-blue-600">
+                  Dedicated to Your Success
+                </span>
+              </h1>
+            </motion.div>
+
+            {/* Purpose Statement */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-8 leading-relaxed"
+            >
+              We <span className="font-semibold text-teal-600">plan</span>, <span className="font-semibold text-teal-600">create</span>, <span className="font-semibold text-teal-600">grow</span>, and <span className="font-semibold text-teal-600">market</span> your business with packaged digital services that are affordable and include free business consulting.
+            </motion.p>
+
+            {/* Key Benefits */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
+            >
+              {[
+                { icon: "🎯", text: "Strategic Planning" },
+                { icon: "💡", text: "Creative Solutions" },
+                { icon: "📈", text: "Growth Marketing" },
+                { icon: "💼", text: "Free Consulting" }
+              ].map((benefit, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                  className="bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300"
+                >
+                  <div className="text-2xl mb-2">{benefit.icon}</div>
+                  <div className="text-sm font-medium text-gray-700">{benefit.text}</div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            >
+              <Button
+                onClick={() => {
+                  setHeroTransformed(true);
+                  setTimeout(() => onOpenCalculator(), 800);
+                }}
+                size="lg"
+                className="bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              >
+                Get Free Consultation
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={scrollToPackages}
+                className="border-2 border-teal-600 text-teal-600 hover:bg-teal-600 hover:text-white px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+              >
+                View Packages
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stop Overpaying Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Main Content - 8 columns on desktop, full width on mobile */}
             <motion.div 
@@ -119,7 +223,7 @@ export default function Home({ onOpenCalculator }: HomeProps) {
                     delay: 2,
                     ease: "backOut"
                   }}
-                  className="text-lime-primary inline-block"
+                  className="text-teal-600 inline-block"
                 >
                   Start Scaling.
                 </motion.span>
@@ -161,10 +265,10 @@ export default function Home({ onOpenCalculator }: HomeProps) {
                       setTimeout(() => onOpenCalculator(), 800);
                     }}
                     size="lg"
-                    className="bg-gradient-to-r from-lime-400 to-lime-600 hover:from-lime-500 hover:to-lime-700 text-white text-sm sm:text-base px-4 sm:px-6 py-3 w-full relative overflow-hidden group"
+                    className="bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 text-white text-sm sm:text-base px-4 sm:px-6 py-3 w-full relative overflow-hidden group"
                   >
                     {/* Enhanced glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-lime-400 to-lime-600 opacity-75 blur-lg group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-teal-600 to-blue-600 opacity-75 blur-lg group-hover:opacity-100 transition-opacity duration-300" />
                     
                     {/* Button content */}
                     <span className="relative z-10 font-semibold">
@@ -185,7 +289,7 @@ export default function Home({ onOpenCalculator }: HomeProps) {
                         delay: 3.5,  // Start pulsing after headline completes
                         ease: "easeInOut"
                       }}
-                      className="absolute inset-0 bg-lime-400 rounded-lg"
+                      className="absolute inset-0 bg-teal-600 rounded-lg"
                     />
                     
                     {/* Additional shimmer effect */}
@@ -199,55 +303,26 @@ export default function Home({ onOpenCalculator }: HomeProps) {
                         ease: "linear",
                         delay: 4
                       }}
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent w-16 skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-8 skew-x-12"
                     />
                   </Button>
                 </motion.div>
-                {/* Smart Secondary CTAs */}
-                <motion.div 
+
+                {/* Secondary CTA */}
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 1.6 }}
-                  className="flex gap-2"
+                  transition={{ duration: 0.6, delay: 1.8 }}
                 >
-                  {isAuthenticated ? (
-                    <>
-                      <Button 
-                        onClick={() => window.location.href = '/dashboard'}
-                        variant="outline"
-                        className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-sm px-3 py-2 flex-1"
-                      >
-                        View Dashboard
-                      </Button>
-                      <Button 
-                        onClick={() => window.location.href = '/client-portal'}
-                        variant="ghost"
-                        className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 text-sm px-3 py-2 flex-1"
-                      >
-                        <span className="hidden sm:inline">My Savings Report</span>
-                        <span className="sm:hidden">My Savings</span>
-                      </Button>
-                    </>
-                  ) : (
-                    <>
-                      <Button 
-                        onClick={scrollToPackages}
-                        variant="outline"
-                        className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-sm px-3 py-2 flex-1"
-                      >
-                        <span className="hidden sm:inline">Explore Packages</span>
-                        <span className="sm:hidden">Packages</span>
-                      </Button>
-                      <Button 
-                        onClick={() => window.location.href = '/services'}
-                        variant="ghost"
-                        className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 text-sm px-3 py-2 flex-1"
-                      >
-                        <span className="hidden sm:inline">View Services</span>
-                        <span className="sm:hidden">Services</span>
-                      </Button>
-                    </>
-                  )}
+                  <Button 
+                    variant="outline"
+                    onClick={scrollToPackages}
+                    size="lg"
+                    className="w-full border-2 border-teal-600 text-teal-600 hover:bg-teal-600 hover:text-white text-sm sm:text-base px-4 sm:px-6 py-3 transition-all duration-300"
+                  >
+                    <span className="hidden sm:inline">View Services</span>
+                    <span className="sm:hidden">Services</span>
+                  </Button>
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -323,377 +398,411 @@ export default function Home({ onOpenCalculator }: HomeProps) {
                 </div>
               </motion.div>
             </motion.div>
-
           </div>
         </div>
       </section>
 
-      {/* Hero Image Section */}
-      <section className="py-8 bg-gradient-to-b from-white to-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-            className="relative"
-          >
-            <motion.img 
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.4 }}
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600" 
-              alt="Modern collaborative workspace with diverse team" 
-              className="rounded-2xl shadow-2xl w-full h-auto"
-            />
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.8 }}
-              className="absolute -bottom-4 -right-4 bg-white p-4 sm:p-6 rounded-xl shadow-xl border border-gray-100"
+      {/* Level Up Your Business Section */}
+      <section className="py-16 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="order-2 lg:order-1"
             >
-              <div className="text-center">
-                <div className="text-teal-600 font-bold text-xl sm:text-2xl">
-                  200+
-                </div>
-                <div className="text-gray-600 text-xs sm:text-sm">Happy Clients</div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-blue-600">
+                  Level Up
+                </span> Your Business
+              </h2>
+              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                Transform your business with our comprehensive digital solutions. From strategic planning to execution, 
+                we provide the expertise and tools you need to scale efficiently and compete in the digital marketplace.
+              </p>
+              <div className="space-y-4 mb-8">
+                {[
+                  "Strategic business planning and market analysis",
+                  "Custom web development and digital platforms",
+                  "Growth marketing and lead generation",
+                  "Ongoing support and optimization"
+                ].map((benefit, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex items-center space-x-3"
+                  >
+                    <div className="w-6 h-6 bg-gradient-to-br from-teal-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Check className="w-4 h-4 text-white" />
+                    </div>
+                    <span className="text-gray-700">{benefit}</span>
+                  </motion.div>
+                ))}
+              </div>
+              <Button
+                onClick={() => {
+                  setHeroTransformed(true);
+                  setTimeout(() => onOpenCalculator(), 800);
+                }}
+                size="lg"
+                className="bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              >
+                Start Your Transformation
+              </Button>
+            </motion.div>
+
+            {/* Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="order-1 lg:order-2 relative"
+            >
+              <div className="relative">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="relative z-10"
+                >
+                  <img 
+                    src="/levelup.jpg" 
+                    alt="Level up your business with digital transformation" 
+                    className="rounded-2xl shadow-2xl w-full h-auto object-cover"
+                    loading="lazy"
+                  />
+                </motion.div>
+                
+                {/* Floating elements */}
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -top-4 -right-4 bg-white p-4 rounded-xl shadow-lg border border-gray-200"
+                >
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-teal-600">70%</div>
+                    <div className="text-sm text-gray-600">Cost Savings</div>
+                  </div>
+                </motion.div>
+                
+                <motion.div
+                  animate={{ y: [0, 10, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute -bottom-4 -left-4 bg-white p-4 rounded-xl shadow-lg border border-gray-200"
+                >
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-blue-600">24/7</div>
+                    <div className="text-sm text-gray-600">Support</div>
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Future Vision Section */}
+      <section className="py-16 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Image */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="relative z-10"
+                >
+                  <img 
+                    src="/future-visions-business-technology-concept.jpg" 
+                    alt="Future vision of business technology and innovation" 
+                    className="rounded-2xl shadow-2xl w-full h-auto object-cover"
+                    loading="lazy"
+                  />
+                </motion.div>
+                
+                {/* Floating elements */}
+                <motion.div
+                  animate={{ rotate: [0, 5, -5, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -top-4 -left-4 bg-gradient-to-br from-teal-500 to-blue-500 p-4 rounded-xl shadow-lg"
+                >
+                  <div className="text-center text-white">
+                    <div className="text-2xl font-bold">Innovation</div>
+                    <div className="text-sm opacity-90">Driven</div>
+                  </div>
+                </motion.div>
+                
+                <motion.div
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                  className="absolute -bottom-4 -right-4 bg-white p-4 rounded-xl shadow-lg border border-gray-200"
+                >
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-teal-600">Future</div>
+                    <div className="text-sm text-gray-600">Ready</div>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            {/* Content */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-600">
+                  Future Vision
+                </span> Technology
+              </h2>
+              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                Stay ahead of the competition with cutting-edge technology solutions. Our forward-thinking approach 
+                ensures your business is equipped with the latest innovations and digital strategies.
+              </p>
+              <div className="space-y-4 mb-8">
+                {[
+                  "Advanced AI and automation solutions",
+                  "Cloud-native architecture and scalability",
+                  "Data-driven insights and analytics",
+                  "Cybersecurity and compliance standards"
+                ].map((feature, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex items-center space-x-3"
+                  >
+                    <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Check className="w-4 h-4 text-white" />
+                    </div>
+                    <span className="text-gray-700">{feature}</span>
+                  </motion.div>
+                ))}
+              </div>
+              <Button
+                onClick={scrollToPackages}
+                size="lg"
+                variant="outline"
+                className="border-2 border-teal-600 text-teal-600 hover:bg-teal-600 hover:text-white px-8 py-4 text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+              >
+                Explore Our Solutions
+              </Button>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Trust Bar */}
       <section ref={trustBarRef} className="py-8 bg-gray-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <motion.p 
-              initial={{ opacity: 0, y: 30 }}
-              animate={trustBarInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="text-gray-medium mb-6"
-            >
-              Trusted by innovative companies to deliver ROI-driven results:
-            </motion.p>
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={trustBarInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex justify-center items-center"
-            >
-              <motion.span 
-                whileHover={{ scale: 1.05 }}
-                className="bg-lime-primary text-white px-4 py-2 rounded-full font-semibold"
-              >
-                Avg. <CountingNumbers end={3.5} trigger={roiVisible} />x ROI in first year
-              </motion.span>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Problem & Solution Section */}
-      <section className="py-8 sm:py-12 lg:py-16 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 sm:mb-12 lg:mb-16 text-gray-dark"
-          >
-            The Hidden Costs of Getting Digital Wrong
-          </motion.h2>
-          
-          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 relative">
-            {/* Problem Column */}
-            <motion.div
-              ref={problemRef}
-              animate={problemControls}
-              initial="hidden"
-              variants={{
-                hidden: { opacity: 0, x: -100 },
-                visible: { 
-                  opacity: 1, 
-                  x: 0,
-                  transition: {
-                    duration: 0.8,
-                    staggerChildren: 0.2
-                  }
-                }
-              }}
-              className="relative z-10"
-            >
-              <Card className="bg-red-50 border-red-200 shadow-lg">
-                <CardContent className="p-8">
-                  <motion.h3 
-                    variants={{
-                      hidden: { opacity: 0, y: 20 },
-                      visible: { opacity: 1, y: 0 }
-                    }}
-                    className="text-2xl font-bold mb-6 text-red-600"
-                  >
-                    Costs of Alternatives
-                  </motion.h3>
-                  <div className="space-y-4">
-                    {[
-                      { title: 'Agencies', desc: 'Paying premium prices for junior talent?' },
-                      { title: 'Freelancers', desc: 'Wasting hours managing 10+ specialists?' },
-                      { title: 'In-House', desc: 'Spending $200K+ per year for one expert?' }
-                    ].map((item, index) => (
-                      <motion.div
-                        key={index}
-                        variants={{
-                          hidden: { opacity: 0, x: -30 },
-                          visible: { 
-                            opacity: 1, 
-                            x: 0,
-                            transition: { delay: index * 0.1 }
-                          }
-                        }}
-                        className="flex items-start"
-                      >
-                        <motion.div
-                          variants={{
-                            hidden: { scale: 0, rotate: -180 },
-                            visible: { 
-                              scale: 1, 
-                              rotate: 0,
-                              transition: { 
-                                type: "spring", 
-                                stiffness: 200,
-                                delay: index * 0.1 + 0.3
-                              }
-                            }
-                          }}
-                        >
-                          <X className="text-red-500 mt-1 mr-3 h-5 w-5 flex-shrink-0" />
-                        </motion.div>
-                        <div>
-                          <h4 className="font-semibold text-gray-dark">{item.title}</h4>
-                          <p className="text-gray-medium">{item.desc}</p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Solution Column */}
-            <motion.div
-              ref={solutionRef}
-              animate={solutionControls}
-              initial="hidden"
-              variants={{
-                hidden: { opacity: 0, x: 100 },
-                visible: { 
-                  opacity: 1, 
-                  x: 0,
-                  transition: {
-                    duration: 0.8,
-                    staggerChildren: 0.15
-                  }
-                }
-              }}
-              className="relative z-10"
-            >
-              <Card className="bg-green-50 border-green-200 shadow-lg">
-                <CardContent className="p-8">
-                  <motion.h3 
-                    variants={{
-                      hidden: { opacity: 0, y: 20 },
-                      visible: { opacity: 1, y: 0 }
-                    }}
-                    className="text-2xl font-bold mb-6 text-green-600"
-                  >
-                    2Pbal Solution
-                  </motion.h3>
-                  <div className="space-y-4">
-                    {[
-                      { title: 'Expert Team', desc: 'Dedicated specialists at 70% less cost' },
-                      { title: 'Single Contact', desc: 'One point of contact manages everything' },
-                      { title: 'Predictable Budget', desc: 'Fixed pricing with guaranteed results' }
-                    ].map((item, index) => (
-                      <motion.div
-                        key={index}
-                        variants={{
-                          hidden: { opacity: 0, x: 30 },
-                          visible: { 
-                            opacity: 1, 
-                            x: 0,
-                            transition: { delay: index * 0.1 }
-                          }
-                        }}
-                        className="flex items-start"
-                      >
-                        <motion.div
-                          variants={{
-                            hidden: { scale: 0, rotate: -180 },
-                            visible: { 
-                              scale: 1, 
-                              rotate: 0,
-                              transition: { 
-                                type: "spring", 
-                                stiffness: 200,
-                                delay: index * 0.1 + 0.3
-                              }
-                            }
-                          }}
-                        >
-                          <Check className="text-green-500 mt-1 mr-3 h-5 w-5 flex-shrink-0" />
-                        </motion.div>
-                        <div>
-                          <h4 className="font-semibold text-gray-dark">{item.title}</h4>
-                          <p className="text-gray-medium">{item.desc}</p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Key Benefits - Bento Grid */}
-      <section className="py-8 sm:py-12 lg:py-16 bg-gradient-to-br from-blue-50 to-teal-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 sm:mb-12 lg:mb-16 text-gray-dark"
-          >
-            Why 2Pbal Outperforms Traditional Solutions
-          </motion.h2>
-          
-          {/* Bento Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 h-auto lg:h-[600px]">
-            {/* Large card - Predictable Budgets */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              className="md:col-span-2 lg:row-span-2 bg-gradient-to-br from-lime-400 to-lime-600 p-8 rounded-2xl text-white relative overflow-hidden"
-            >
-              <div className="relative z-10">
-                <TrendingUp className="w-12 h-12 mb-4" />
-                <h3 className="text-2xl font-bold mb-4">Predictable Budgets</h3>
-                <p className="text-lime-100 mb-6">Stop budget surprises. Our fixed-price packages give you complete cost visibility from day one.</p>
-                <div className="flex items-center gap-4">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold">
-                      <CountingNumbers end={70} suffix="%" trigger={true} />
-                    </div>
-                    <div className="text-sm text-lime-100">Cost Savings</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold">0</div>
-                    <div className="text-sm text-lime-100">Hidden Fees</div>
-                  </div>
-                </div>
-              </div>
-              {/* Background decoration */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -translate-y-16 translate-x-16" />
-            </motion.div>
-
-            {/* Faster Delivery */}
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100"
-            >
-              <Rocket className="w-8 h-8 mb-4 text-blue-600" />
-              <h3 className="text-xl font-bold mb-3 text-gray-dark">Faster Delivery</h3>
-              <p className="text-gray-medium text-sm">Launch 3x faster with our proven process</p>
-              <div className="mt-4 text-2xl font-bold text-blue-600">
-                <CountingNumbers end={3} suffix="x" trigger={true} /> Faster
-              </div>
-            </motion.div>
-
-            {/* Expert Team */}
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              className="bg-gradient-to-br from-teal-500 to-teal-700 p-6 rounded-2xl text-white"
-            >
-              <MessageCircle className="w-8 h-8 mb-4" />
-              <h3 className="text-xl font-bold mb-3">Expert Team Access</h3>
-              <p className="text-teal-100 text-sm">Dedicated specialists for less than one employee</p>
-              <div className="mt-4 text-sm text-teal-100">
-                10+ Specialists Available
-              </div>
-            </motion.div>
-
-            {/* Scalable Solutions */}
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              className="md:col-span-2 bg-white p-6 rounded-2xl shadow-lg border border-gray-100"
-            >
-              <ClipboardList className="w-8 h-8 mb-4 text-blue-600" />
-              <h3 className="text-xl font-bold mb-3 text-gray-dark">Scalable Solutions</h3>
-              <p className="text-gray-medium">Grow your package as your business expands</p>
-              <div className="flex gap-4 mt-4">
-                <div className="text-center">
-                  <div className="text-lg font-bold text-blue-600">Starter</div>
-                  <div className="text-sm text-gray-500">$2,997/mo</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-teal-600">Growth</div>
-                  <div className="text-sm text-gray-500">$4,997/mo</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-lime-600">Pro</div>
-                  <div className="text-sm text-gray-500">$7,997/mo</div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Service Packages Overview */}
-      <section id="packages" className="py-16 bg-gray-light">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-wrap justify-center items-center gap-8 sm:gap-12 lg:gap-16 text-gray-500"
+          >
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-gray-700 mb-1">
+                <CountingNumbers end={200} suffix="+" trigger={roiVisible} />
+              </div>
+              <div className="text-sm">Happy Clients</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-gray-700 mb-1">
+                <CountingNumbers end={500} suffix="+" trigger={roiVisible} />
+              </div>
+              <div className="text-sm">Projects Completed</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-gray-700 mb-1">
+                <CountingNumbers end={70} suffix="%" trigger={roiVisible} />
+              </div>
+              <div className="text-sm">Average Savings</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-gray-700 mb-1">
+                <CountingNumbers end={24} suffix="/7" trigger={roiVisible} />
+              </div>
+              <div className="text-sm">Support Available</div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Problem Section */}
+      <section ref={problemRef} className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            animate={problemControls}
+            variants={{
+              hidden: { opacity: 0, y: 50 },
+              visible: { opacity: 1, y: 0 }
+            }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              The Problem with Traditional Agencies
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Most businesses struggle with high costs, slow delivery, and lack of transparency when working with traditional digital agencies.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: X,
+                title: "High Costs",
+                description: "Traditional agencies charge $150-300/hour per specialist, making comprehensive solutions unaffordable for most businesses."
+              },
+              {
+                icon: X,
+                title: "Slow Delivery",
+                description: "Complex agency structures and multiple handoffs result in months-long project timelines and missed opportunities."
+              },
+              {
+                icon: X,
+                title: "Lack of Transparency",
+                description: "Hidden fees, unclear pricing, and limited visibility into project progress create frustration and uncertainty."
+              }
+            ].map((problem, index) => (
+              <motion.div
+                key={index}
+                initial="hidden"
+                animate={problemControls}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="bg-red-50 border border-red-200 rounded-xl p-6 text-center"
+              >
+                <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <problem.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">{problem.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{problem.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Solution Section */}
+      <section ref={solutionRef} className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            animate={solutionControls}
+            variants={{
+              hidden: { opacity: 0, y: 50 },
+              visible: { opacity: 1, y: 0 }
+            }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              Our Solution: Affordable Excellence
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              We've reimagined digital services to provide enterprise-quality solutions at prices that work for growing businesses.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Check,
+                title: "Fixed Pricing",
+                description: "Transparent, all-inclusive packages with no hidden fees. Know exactly what you're paying for upfront."
+              },
+              {
+                icon: Check,
+                title: "Rapid Delivery",
+                description: "Streamlined processes and dedicated teams ensure faster project completion without sacrificing quality."
+              },
+              {
+                icon: Check,
+                title: "Full Transparency",
+                description: "Real-time project tracking, regular updates, and clear communication throughout the entire process."
+              }
+            ].map((solution, index) => (
+              <motion.div
+                key={index}
+                initial="hidden"
+                animate={solutionControls}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="bg-green-50 border border-green-200 rounded-xl p-6 text-center"
+              >
+                <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <solution.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">{solution.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{solution.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Packages Section */}
+      <section id="packages" className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-dark">
-              All-Inclusive Packages, Not All-Inclusive Prices
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              Choose Your Growth Package
             </h2>
-            <p className="text-xl text-gray-medium">Choose your growth stage and see immediate savings</p>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Comprehensive digital solutions designed to scale with your business, from startup to enterprise.
+            </p>
           </motion.div>
-          
-          <div className="grid lg:grid-cols-4 gap-8">
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {PACKAGES.map((pkg, index) => (
               <motion.div
                 key={pkg.id}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -10, transition: { duration: 0.3 } }}
               >
                 <PackageCard
                   package={pkg}
                   onSelect={handlePackageSelect}
+                  isAuthenticated={isAuthenticated}
                 />
               </motion.div>
             ))}
@@ -701,145 +810,94 @@ export default function Home({ onOpenCalculator }: HomeProps) {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="py-16 bg-white">
+      {/* Case Studies Section */}
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-dark">
-              Transparent Process, Predictable Savings
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              Success Stories
             </h2>
-            <p className="text-xl text-gray-medium">Four simple steps to transform your digital presence</p>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              See how we've helped businesses like yours achieve remarkable results and significant cost savings.
+            </p>
           </motion.div>
-          
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { icon: MessageCircle, title: 'Consult', desc: 'Free discovery session to align on goals & budget', color: 'lime-primary' },
-              { icon: ClipboardList, title: 'Plan', desc: 'Fixed-price proposal - no hourly billing surprises', color: 'teal-primary' },
-              { icon: Rocket, title: 'Execute', desc: 'Track progress & costs in real-time dashboard', color: 'lime-primary' },
-              { icon: TrendingUp, title: 'Grow', desc: 'Ongoing optimization to maximize your ROI', color: 'teal-primary' }
-            ].map((step, index) => (
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {CASE_STUDIES.slice(0, 3).map((study, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                className="text-center"
               >
-                <motion.div 
-                  whileHover={{ scale: 1.1 }}
-                  className={`bg-${step.color} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg`}
-                >
-                  <step.icon className="text-white h-8 w-8" />
-                </motion.div>
-                <h3 className="text-xl font-bold mb-2 text-gray-dark">{step.title}</h3>
-                <p className="text-gray-medium">{step.desc}</p>
+                <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-blue-500 rounded-lg flex items-center justify-center mr-4">
+                        <TrendingUp className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900">{study.title}</h3>
+                        <p className="text-sm text-gray-600">{study.industry}</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-600 mb-4 leading-relaxed">{study.description}</p>
+                    <div className="flex items-center justify-between">
+                      <div className="text-2xl font-bold text-teal-600">{study.savings}</div>
+                      <div className="text-sm text-gray-500">Cost Savings</div>
+                    </div>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Case Studies Section */}
-      <section className="py-16 bg-gray-light">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-dark">
-              See The Savings In Action
-            </h2>
-            <p className="text-xl text-gray-medium">Real results from real clients</p>
-          </div>
-          
-          <div className="grid lg:grid-cols-3 gap-8">
-            {CASE_STUDIES.map((caseStudy) => (
-              <Card key={caseStudy.id} className="shadow-lg hover:shadow-xl transition-shadow">
-                <CardContent className="p-8">
-                  <img 
-                    src={caseStudy.image} 
-                    alt="Case study client scenario" 
-                    className="w-full h-48 object-cover rounded-lg mb-6"
-                  />
-                  <div className="mb-4">
-                    <h4 className="font-bold text-gray-dark mb-2">Challenge:</h4>
-                    <p className="text-gray-medium">"{caseStudy.challenge}"</p>
-                  </div>
-                  <div className="mb-4">
-                    <h4 className="font-bold text-gray-dark mb-2">Solution:</h4>
-                    <p className="text-gray-medium">"{caseStudy.solution}"</p>
-                  </div>
-                  <div className="bg-lime-primary p-4 rounded-lg">
-                    <h4 className="font-bold text-white mb-2">Results:</h4>
-                    <p className="text-white">"{caseStudy.results}"</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-teal-primary to-blue-600 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
+      {/* CTA Section */}
+      <section className="py-16 bg-gradient-to-r from-teal-600 to-blue-600">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-            className="absolute top-10 left-10 w-32 h-32 border-4 border-white rounded-full"
-          />
-          <motion.div
-            animate={{ rotate: -360 }}
-            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-10 right-10 w-24 h-24 border-4 border-lime-400 rounded-full"
-          />
-        </div>
-        
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <motion.h2 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-3xl lg:text-4xl font-bold mb-4 text-white"
           >
-            Ready to Stop Wasting Your Budget?
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="text-xl mb-8 text-white opacity-90"
-          >
-            Join hundreds of smart businesses that scaled efficiently.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link href="/quote">
-              <Button 
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+              Ready to Transform Your Business?
+            </h2>
+            <p className="text-xl text-teal-100 mb-8 max-w-2xl mx-auto">
+              Join hundreds of businesses that have already saved money and achieved their goals with our comprehensive digital services.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                onClick={() => {
+                  setHeroTransformed(true);
+                  setTimeout(() => onOpenCalculator(), 800);
+                }}
                 size="lg"
-                className="bg-lime-primary text-white hover:bg-green-500 text-lg px-8 py-4 shadow-2xl relative overflow-hidden group"
+                variant="secondary"
+                className="bg-white text-teal-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold"
               >
-                <span className="relative z-10">Schedule Free Consultation</span>
-              <motion.div
-                animate={{ x: ["-100%", "100%"] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 skew-x-12"
-              />
+                Get Free Consultation
               </Button>
-            </Link>
+              <Link href="/packages">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-teal-600 px-8 py-4 text-lg font-semibold"
+                >
+                  View All Packages
+                </Button>
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>

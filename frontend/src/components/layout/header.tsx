@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Menu, User, LogOut, Settings, BarChart3, Home, Shield, Mail, AlertTriangle } from 'lucide-react';
+import { Menu, User, LogOut, Settings, BarChart3, Home, Shield, Mail, AlertTriangle, Code } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
 import { ContactPopup } from '@/components/ui/contact-popup';
@@ -25,6 +25,7 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
 
   const navigation = [
     { name: 'Home', href: '/', icon: 'home' },
+    { name: 'About Us', href: '/about', icon: 'info' },
     { name: 'Packages', href: '/packages', icon: 'package' },
     { name: 'Services', href: '/services', icon: 'grid' },
   ];
@@ -115,18 +116,20 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
         </div>
       )}
       
-      <header className={`bg-blue-600 shadow-sm fixed w-full z-40 ${isAuthenticated && !user?.emailVerified ? 'top-10' : 'top-0'}`}>
+      <header className={`bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100 fixed w-full z-40 ${isAuthenticated && !user?.emailVerified ? 'top-10' : 'top-0'}`}>
       <nav className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
         <div className="flex justify-between items-center h-16 lg:h-20">
           <div className="flex items-center min-w-0 flex-1">
             <Link href="/" className="flex items-center group mr-4 lg:mr-8 flex-shrink-0">
-              <img 
-                src={logoPath} 
-                alt="2Pbal Logo" 
-                className="h-10 sm:h-12 lg:h-16 w-auto object-contain max-w-none" 
-              />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-teal-500 to-blue-600 rounded-lg flex items-center justify-center">
+                <Code className="h-6 w-6 sm:h-8 sm:w-8 lg:h-10 lg:w-10 text-white" />
+              </div>
+              <div className="flex flex-col ml-3">
+                <span className="text-gray-900 font-bold text-sm sm:text-base lg:text-lg">Precise Programming</span>
+                <span className="text-xs sm:text-sm text-gray-600 -mt-1 hidden sm:block">for Business Advancement & Leverage</span>
+              </div>
             </Link>
-            <span className="text-xs sm:text-sm text-white font-medium hidden xl:block truncate">
+            <span className="text-xs sm:text-sm text-gray-600 font-medium hidden xl:block truncate ml-4">
               Enterprise Results, Without Enterprise Costs
             </span>
           </div>
@@ -136,10 +139,10 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`font-medium transition-colors text-xs xl:text-sm whitespace-nowrap px-2 py-1 rounded hover:bg-blue-700 ${
+                className={`font-medium transition-colors text-xs xl:text-sm whitespace-nowrap px-3 py-2 rounded-lg hover:bg-gray-100 ${
                   location === item.href 
-                    ? 'text-lime-primary bg-blue-700' 
-                    : 'text-white hover:text-lime-primary'
+                    ? 'text-teal-600 bg-teal-50 border border-teal-200' 
+                    : 'text-gray-700 hover:text-teal-600'
                 }`}
               >
                 <span className="xl:hidden">{item.name.split(' ')[0]}</span>
@@ -190,7 +193,7 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
             
             <ContactPopup>
               <Button 
-                className="bg-white text-blue-600 hover:bg-gray-100 text-xs px-2 py-1 whitespace-nowrap ml-2"
+                className="bg-gray-100 text-gray-700 hover:bg-gray-200 text-xs px-3 py-2 whitespace-nowrap ml-2"
                 size="sm"
               >
                 <Mail className="h-3 w-3 mr-1" />
@@ -203,7 +206,7 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
             {isAuthenticated ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="text-white hover:text-lime-primary text-xs px-2 py-1" size="sm">
+                  <Button variant="ghost" className="text-gray-700 hover:text-teal-600 text-xs px-3 py-2" size="sm">
                     <User className="h-3 w-3 mr-1" />
                     <span className="hidden xl:inline">{user?.firstName || 'Account'}</span>
                   </Button>
@@ -239,13 +242,13 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
             ) : (
               <div className="flex items-center space-x-2">
                 <Link href="/login">
-                  <Button variant="ghost" className="text-white hover:text-lime-primary text-xs px-2 py-1" size="sm">
+                  <Button variant="ghost" className="text-gray-700 hover:text-teal-600 text-xs px-3 py-2" size="sm">
                     <span className="xl:hidden">Login</span>
                     <span className="hidden xl:inline">Sign In</span>
                   </Button>
                 </Link>
                 <Link href="/signup">
-                  <Button className="bg-white text-teal-primary hover:bg-gray-100 text-xs px-2 py-1" size="sm">
+                  <Button className="bg-teal-600 text-white hover:bg-teal-700 text-xs px-3 py-2" size="sm">
                     <span className="xl:hidden">Start</span>
                     <span className="hidden xl:inline">Get Started</span>
                   </Button>
@@ -258,14 +261,14 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="p-2 min-h-[44px] min-w-[44px]">
-                  <Menu className="h-6 w-6 text-white" />
+                  <Menu className="h-6 w-6 text-gray-700" />
                 </Button>
               </SheetTrigger>
               <SheetContent className="w-[280px] sm:w-[320px]">
                 <div className="flex flex-col space-y-2 mt-8">
                   <Link
                     href="/"
-                    className="flex items-center space-x-3 font-medium text-lg text-gray-dark hover:text-teal-primary transition-colors p-3 rounded-lg hover:bg-gray-50"
+                    className="flex items-center space-x-3 font-medium text-lg text-gray-700 hover:text-teal-600 transition-colors p-3 rounded-lg hover:bg-gray-50"
                     onClick={() => setIsOpen(false)}
                   >
                     <Home className="h-5 w-5" />
@@ -277,8 +280,8 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                       href={item.href}
                       className={`font-medium text-lg transition-colors p-3 rounded-lg hover:bg-gray-50 ${
                         location === item.href 
-                          ? 'text-teal-primary bg-teal-50' 
-                          : 'text-gray-dark hover:text-teal-primary'
+                          ? 'text-teal-600 bg-teal-50 border border-teal-200' 
+                          : 'text-gray-700 hover:text-teal-600'
                       }`}
                       onClick={() => setIsOpen(false)}
                     >
@@ -321,7 +324,7 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                         </Button>
                       </Link>
                       <Link href="/signup" onClick={() => setIsOpen(false)}>
-                        <Button className="w-full bg-teal-primary text-white hover:bg-teal-600">
+                        <Button className="w-full bg-teal-600 text-white hover:bg-teal-700">
                           Get Started
                         </Button>
                       </Link>
