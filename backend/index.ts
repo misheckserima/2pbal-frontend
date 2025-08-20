@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes.js";
 import { serveStatic, log } from "./vite.js";
+import { pool, getDatabaseStatus } from "./db-config.js";
 
 const app = express();
 app.use(express.json());
@@ -37,7 +38,36 @@ app.use((req, res, next) => {
   next();
 });
 
+// Test database connection
+async function testDatabaseConnection() {
+  try {
+    log("🔍 Testing database connection...");
+    const dbStatus = getDatabaseStatus();
+    log(`📊 Database Provider: ${dbStatus.provider}`);
+    log(`📋 Description: ${dbStatus.description}`);
+    
+    // Test actual connection
+    const client = await pool.connect();
+    await client.query('SELECT NOW() as current_time');
+    client.release();
+    
+    log("✅ Database connection successful!");
+    log("🎯 Database is ready to handle requests");
+    return true;
+  } catch (error) {
+    log("❌ Database connection failed!");
+    log(`💥 Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    return false;
+  }
+}
+
 (async () => {
+  // Test database connection first
+  const dbConnected = await testDatabaseConnection();
+  if (!dbConnected) {
+    log("⚠️  Server starting without database connection - some features may not work");
+  }
+
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
@@ -57,6 +87,11 @@ app.use((req, res, next) => {
   // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || '5000', 10);
   server.listen(port, "0.0.0.0", () => {
-    log(`serving on port ${port}`);
+    log(`🚀 Server started successfully on port ${port}`);
+    if (dbConnected) {
+      log("🎉 Full system ready - Database connected and server running!");
+    } else {
+      log("⚠️  Server running but database connection failed");
+    }
   });
 })();

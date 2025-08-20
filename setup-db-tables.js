@@ -1,11 +1,14 @@
 import { neon } from '@neondatabase/serverless';
+import dotenv from 'dotenv';
 
-// Database connection - using your Neon database URL
-const sql = neon('postgresql://neondb_owner:npg_4tf7ILEBVdSR@ep-plain-glade-a2pnm2q0-pooler.eu-central-1.aws.neon.tech/2pbaladmin_database?sslmode=require&channel_binding=require');
+// Load environment variables
+dotenv.config();
+
+const sql = neon(process.env.NEON_DATABASE_URL);
 
 async function setupDatabase() {
   try {
-    console.log('Setting up database tables...');
+    console.log('🔧 Setting up database tables...');
     
     // Create users table
     await sql`
@@ -111,6 +114,7 @@ async function setupDatabase() {
     console.log('✅ Quotes table created');
 
     console.log('🎉 All database tables created successfully!');
+    console.log('📊 You can now check your Neon database dashboard to see the tables.');
     
   } catch (error) {
     console.error('❌ Error setting up database:', error);
