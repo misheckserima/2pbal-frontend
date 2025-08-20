@@ -6,7 +6,8 @@
     "dev": "cross-env NODE_ENV=development tsx index.ts",
     "build": "tsc",
     "start": "NODE_ENV=production node dist/index.js",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "db:setup": "node setup-database.js"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
