@@ -281,7 +281,11 @@ export const changePasswordSchema = z.object({
 
 export const accountDeletionSchema = z.object({
   password: z.string().min(6, "Password is required to delete account"),
+<<<<<<< HEAD
   confirmation: z.literal("DELETE"),
+=======
+  confirmation: z.literal("DELETE").refine(val => val === "DELETE", { message: "Please type DELETE to confirm" }),
+>>>>>>> 4db41466bd558f97ee380bcefa1ced94e68f6854
 });
 
 export const emailVerificationSchema = z.object({
@@ -295,7 +299,11 @@ export const createPaymentIntentSchema = z.object({
   serviceId: z.string().optional(),
   planId: z.string().optional(),
   description: z.string().optional(),
+<<<<<<< HEAD
   metadata: z.record(z.string(), z.unknown()).optional(),
+=======
+  metadata: z.record(z.string(), z.string()).optional(),
+>>>>>>> 4db41466bd558f97ee380bcefa1ced94e68f6854
 });
 
 export const createSubscriptionSchema = z.object({
@@ -335,11 +343,19 @@ export const insertInvoiceSchema = createInsertSchema(invoices).omit({
 });
 
 // Types
+<<<<<<< HEAD
 export type InsertPayment = z.infer<typeof insertPaymentSchema>;
 export type Payment = typeof payments.$inferSelect;
 export type InsertSubscription = z.infer<typeof insertSubscriptionSchema>;
 export type Subscription = typeof subscriptions.$inferSelect;
 export type InsertInvoice = z.infer<typeof insertInvoiceSchema>;
+=======
+export type InsertPayment = any;
+export type Payment = typeof payments.$inferSelect;
+export type InsertSubscription = any;
+export type Subscription = typeof subscriptions.$inferSelect;
+export type InsertInvoice = any;
+>>>>>>> 4db41466bd558f97ee380bcefa1ced94e68f6854
 export type Invoice = typeof invoices.$inferSelect;
 
 // Insert schemas for new tables
@@ -355,6 +371,7 @@ export const insertPackageViewTrackingSchema = createInsertSchema(packageViewTra
 });
 
 // Types for new tables
+<<<<<<< HEAD
 export type InsertEmailVerificationToken = z.infer<typeof insertEmailVerificationTokenSchema>;
 export type EmailVerificationToken = typeof emailVerificationTokens.$inferSelect;
 export type InsertPackageViewTracking = z.infer<typeof insertPackageViewTrackingSchema>;
@@ -362,6 +379,15 @@ export type PackageViewTracking = typeof packageViewTracking.$inferSelect;
 
 // Insert schemas
 export const insertUserSchema = createInsertSchema(users).omit({
+=======
+export type InsertEmailVerificationToken = any;
+export type EmailVerificationToken = typeof emailVerificationTokens.$inferSelect;
+export type InsertPackageViewTracking = any;
+export type PackageViewTracking = typeof packageViewTracking.$inferSelect;
+
+// Insert schemas
+export const insertUserSchema = createInsertSchema(users).omit({ // @ts-ignore
+>>>>>>> 4db41466bd558f97ee380bcefa1ced94e68f6854
   id: true,
   createdAt: true,
   updatedAt: true,
@@ -381,7 +407,11 @@ export const insertProjectSchema = createInsertSchema(userProjects).omit({
 
 // Types
 export type User = typeof users.$inferSelect;
+<<<<<<< HEAD
 export type InsertUser = z.infer<typeof insertUserSchema>;
+=======
+export type InsertUser = any;
+>>>>>>> 4db41466bd558f97ee380bcefa1ced94e68f6854
 export type LoginData = z.infer<typeof loginSchema>;
 export type SignupData = z.infer<typeof signupSchema>;
 export type ProfileUpdate = z.infer<typeof profileUpdateSchema>;
@@ -395,6 +425,12 @@ export type AccountDeletion = z.infer<typeof accountDeletionSchema>;
 export type EmailVerificationData = z.infer<typeof emailVerificationSchema>;
 export type PackageRecommendation = z.infer<typeof packageRecommendationSchema>;
 export type Quote = typeof quotes.$inferSelect;
+<<<<<<< HEAD
 export type InsertQuote = z.infer<typeof insertQuoteSchema>;
 export type UserProject = typeof userProjects.$inferSelect;
 export type InsertProject = z.infer<typeof insertProjectSchema>;
+=======
+export type InsertQuote = any;
+export type UserProject = typeof userProjects.$inferSelect;
+export type InsertProject = any;
+>>>>>>> 4db41466bd558f97ee380bcefa1ced94e68f6854
