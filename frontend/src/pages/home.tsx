@@ -19,20 +19,17 @@ export default function Home({ onOpenCalculator }: HomeProps) {
   const [roiVisible, setRoiVisible] = useState(false);
   const [heroTransformed, setHeroTransformed] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [transitionType, setTransitionType] = useState<'fade' | 'slide'>('fade');
   const problemRef = useRef(null);
   const solutionRef = useRef(null);
   const trustBarRef = useRef(null);
   
-  // Background images array
+  // Background images array - Only the 4 specified images
   const backgroundImages = [
-    "https://res.cloudinary.com/ppbal/image/upload/v1755703910/cover_wmmrdn.jpg",
-    "https://res.cloudinary.com/ppbal/image/upload/v1755705711/dynamic-data-visualization-3d_2_apjoys.jpg",
+    "https://res.cloudinary.com/ppbal/image/upload/v1755706320/smiling-businessman-signing-contract_as5sau.jpg",
     "https://res.cloudinary.com/ppbal/image/upload/v1755705712/african-entrepreneur-start-up-company-reading-charts-documents-paperwork-diverse-team-business-people-analyzing-company-financial-reports-from-computer-successful-corporate-professional-ent_cbit7s.jpg",
     "https://res.cloudinary.com/ppbal/image/upload/v1755705703/dynamic-data-visualization-3d_1_u0fq3e.jpg",
-    "https://res.cloudinary.com/ppbal/image/upload/v1755705701/index-finger-touching-purple-arrow_xnjmry.jpg",
-    "https://res.cloudinary.com/ppbal/image/upload/v1755705699/business-concept-with-team-close-up_klklah.jpg",
-    "https://res.cloudinary.com/ppbal/image/upload/v1755706321/aerial-view-business-team_iskcfb.jpg",
-    "https://res.cloudinary.com/ppbal/image/upload/v1755706320/smiling-businessman-signing-contract_as5sau.jpg"
+    "https://res.cloudinary.com/ppbal/image/upload/v1755705701/index-finger-touching-purple-arrow_xnjmry.jpg"
   ];
   
   const problemInView = useInView(problemRef, { once: true });
@@ -67,18 +64,29 @@ export default function Home({ onOpenCalculator }: HomeProps) {
     }
   }, [trustBarInView]);
 
-  // Randomize initial image and rotate images
+  // Randomize initial image and rotate images with specific transition sequence
   useEffect(() => {
     // Set random initial image
     const randomIndex = Math.floor(Math.random() * backgroundImages.length);
     setCurrentImageIndex(randomIndex);
     
-    // Rotate images every 8 seconds
+    // Rotate images every 6 seconds with specific transition sequence
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => 
-        (prevIndex + 1) % backgroundImages.length
-      );
-    }, 8000);
+      setCurrentImageIndex((prevIndex) => {
+        const nextIndex = (prevIndex + 1) % backgroundImages.length;
+        
+        // Set transition type based on position in sequence
+        // First 2: fade, 3rd: slide, 4th: fade
+        const positionInSequence = (nextIndex + 1) % 4;
+        if (positionInSequence === 3) {
+          setTransitionType('slide'); // 3rd image slides from right
+        } else {
+          setTransitionType('fade'); // 1st, 2nd, and 4th images fade
+        }
+        
+        return nextIndex;
+      });
+    }, 6000);
     
     return () => clearInterval(interval);
   }, [backgroundImages.length]);
@@ -95,8 +103,9 @@ export default function Home({ onOpenCalculator }: HomeProps) {
     <div className={`${isAuthenticated && !user?.emailVerified ? 'pt-[104px] lg:pt-[120px]' : 'pt-16 lg:pt-20'}`}>
       {/* Hero Section - Dynamic Background Images */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Dynamic Background Images */}
-        <div className="absolute inset-0">
+        {/* Dynamic Background Images - Reduced width */}
+        <div className="absolute inset-0 flex justify-center">
+          <div className="w-full max-w-6xl h-full">
           <AnimatePresence mode="wait">
             <motion.img 
               key={currentImageIndex}
@@ -104,10 +113,22 @@ export default function Home({ onOpenCalculator }: HomeProps) {
               alt="Business growth and digital transformation" 
               className="w-full h-full object-cover"
               loading="eager"
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
+              initial={transitionType === 'fade' 
+                ? { opacity: 0, scale: 1.1 }
+                : { opacity: 1, x: '100%' }
+              }
+              animate={transitionType === 'fade'
+                ? { opacity: 1, scale: 1 }
+                : { opacity: 1, x: 0 }
+              }
+              exit={transitionType === 'fade'
+                ? { opacity: 0, scale: 0.9 }
+                : { opacity: 0, x: '-100%' }
+              }
+              transition={{ 
+                duration: transitionType === 'fade' ? 1.5 : 1.2, 
+                ease: "easeInOut" 
+              }}
               onLoad={() => console.log('Background image loaded successfully')}
               onError={(e) => {
                 console.error('Failed to load background image:', e);
@@ -115,6 +136,7 @@ export default function Home({ onOpenCalculator }: HomeProps) {
               }}
             />
           </AnimatePresence>
+          </div>
           
           {/* Subtle overlay for better text readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-black/20"></div>
@@ -128,7 +150,7 @@ export default function Home({ onOpenCalculator }: HomeProps) {
         </div>
         
         {/* Content */}
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-0">
           {/* Top small text */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
