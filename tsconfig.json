@@ -20,6 +20,6 @@
       "@shared/*": ["../shared/*"]
     }
   },
-  "include": ["*.ts", "../shared/**/*.ts"],
+  "include": ["backend/**/*.ts", "shared/**/*.ts"],
   "exclude": ["node_modules", "dist", "**/*.test.ts"]
 }
