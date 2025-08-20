@@ -588,7 +588,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: errorMessage.toString() });
       }
 
-      const verified = await storage.verifyEmail(result.data.token);
+             const verified = await storage.verifyEmailToken(result.data.token);
       if (!verified) {
         return res.status(400).json({ message: "Invalid or expired verification token" });
       }

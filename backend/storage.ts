@@ -1239,6 +1239,16 @@ export class DatabaseStorage implements IStorage {
     return false;
   }
 
+  // Alias for verifyEmailToken to match interface
+  async verifyEmail(token: string): Promise<boolean> {
+    return this.verifyEmailToken(token);
+  }
+
+  // Alias for createEmailVerificationToken to match interface
+  async createEmailVerification(userId: number, email: string): Promise<any> {
+    return this.createEmailVerificationToken(userId, email);
+  }
+
   async deleteEmailVerificationToken(token: string): Promise<void> {
     await db.delete(emailVerificationTokens).where(eq(emailVerificationTokens.token, token));
   }
@@ -1306,7 +1316,16 @@ export class DatabaseStorage implements IStorage {
 
   // Quote operations
   async createQuote(quote: InsertQuote): Promise<Quote> {
-    const result = await db.insert(quotes).values(quote).returning();
+    // Convert JSON fields to proper types for database insertion
+    const quoteData = {
+      ...quote,
+      goals: Array.isArray(quote.goals) ? quote.goals : [],
+      overspending: Array.isArray(quote.overspending) ? quote.overspending : [],
+      outcomes: Array.isArray(quote.outcomes) ? quote.outcomes : [],
+      attachments: quote.attachments || []
+    };
+    
+    const result = await db.insert(quotes).values(quoteData).returning();
     return result[0];
   }
 
@@ -1376,11 +1395,13 @@ export class DatabaseStorage implements IStorage {
       query = query.where(eq(activityLogs.userId, userId));
     }
     
+    const result = await query.orderBy(desc(activityLogs.createdAt));
+    
     if (limit) {
-      query = query.limit(limit);
+      return result.slice(0, limit);
     }
     
-    return await query.orderBy(desc(activityLogs.createdAt));
+    return result;
   }
 
   // Payment operations (stub implementations)
