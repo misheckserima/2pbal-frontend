@@ -19,11 +19,7 @@ import {
   createPaymentIntentSchema,
   createSubscriptionSchema,
   cancelSubscriptionSchema
-<<<<<<< HEAD
 } from "../shared/schema.js";
-=======
-} from "./shared/schema.js";
->>>>>>> d2b0f008736008fefc8c80f4e1574258187d6081
 // @ts-ignore - zod-validation-error module types not available
 import { fromZodError } from "zod-validation-error";
 import multer from "multer";
