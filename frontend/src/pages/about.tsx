@@ -1,8 +1,10 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Users, Target, Lightbulb, Award } from 'lucide-react';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { SEO } from '@/components/ui/seo';
 
 export default function About() {
   useEffect(() => {
@@ -10,7 +12,14 @@ export default function About() {
   }, []);
 
   return (
-    <div className="pt-16 lg:pt-20 min-h-screen bg-gray-50">
+    <>
+      <SEO 
+        title="About 2PBAL - Our Story, Mission & Founding Team | Digital Solutions"
+        description="Learn about 2PBAL's journey from a simple question to a powerful business solution. Meet our founding team of Misheck Serima (CEO), Elton Huche, and Makanaka Mukorombindo (CTO). Discover our mission to bridge the digital gap for small businesses."
+        keywords="about 2PBAL, founding team, Misheck Serima, Elton Huche, Makanaka Mukorombindo, business story, digital solutions, small business, startup, company mission, team values"
+        url="https://2pbal.com/about"
+      />
+      <div className="pt-16 lg:pt-20 min-h-screen bg-gray-50">
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-br from-teal-600 to-blue-700 text-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -267,5 +276,6 @@ export default function About() {
         </div>
       </section>
     </div>
+    </>
   );
 }

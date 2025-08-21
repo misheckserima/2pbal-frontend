@@ -9,6 +9,7 @@ import { motion, useInView, useAnimation, AnimatePresence } from 'framer-motion'
 import CountingNumbers from '@/components/ui/counting-numbers';
 import { Link } from 'wouter';
 import { HesitationTooltip } from '@/components/ui/smart-tooltip';
+import { SEO } from '@/components/ui/seo';
 
 interface HomeProps {
   onOpenCalculator: () => void;
@@ -100,7 +101,14 @@ export default function Home({ onOpenCalculator }: HomeProps) {
   };
 
   return (
-    <div className={`${isAuthenticated && !user?.emailVerified ? 'pt-[104px] lg:pt-[120px]' : 'pt-16 lg:pt-20'}`}>
+    <>
+      <SEO 
+        title="2PBAL - Small Business Growth & Sales Boost | Free Consultation | Installment Plans"
+        description="Transform your small business with 2PBAL's dedicated team. Boost sales, dominate online competition, and grow your brand. Free business consultation + affordable installment plans. Save 70% vs agencies. Perfect for startups and small businesses."
+        keywords="small business growth, startup help, sales boost, online competition, brand growth, free business consultation, affordable digital services, installment plans, cheap web development, small business marketing, startup digital solutions, business growth services, dedicated team, cost-effective, web development, digital marketing, AI automation"
+        url="https://2pbal.com"
+      />
+      <div className={`${isAuthenticated && !user?.emailVerified ? 'pt-[104px] lg:pt-[120px]' : 'pt-16 lg:pt-20'}`}>
       {/* Hero Section - Dynamic Background Images */}
       <section className="relative h-[80vh] sm:h-screen flex items-center justify-center overflow-hidden">
         {/* Dynamic Background Images */}
@@ -1017,5 +1025,6 @@ export default function Home({ onOpenCalculator }: HomeProps) {
         </div>
       </section>
     </div>
+    </>
   );
 }

@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://2pbal.com/sitemap.xml
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+
+# Allow important pages
+Allow: /about
+Allow: /packages
+Allow: /services
+Allow: /case-studies
+Allow: /careers
+Allow: /quote
+Allow: /privacy-policy
+
+# Crawl delay (optional)
+Crawl-delay: 1

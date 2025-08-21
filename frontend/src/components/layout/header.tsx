@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Menu, User, LogOut, Settings, BarChart3, Home, Shield, Mail, AlertTriangle, Code } from 'lucide-react';
+import { Menu, User, LogOut, Settings, BarChart3, Home, Shield, Mail, AlertTriangle, Code, X, Users, Package, Grid, Rocket } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
 import { ContactPopup } from '@/components/ui/contact-popup';
@@ -120,11 +120,11 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
       <nav className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
         <div className="flex justify-between items-center h-16 lg:h-20">
           <div className="flex items-center min-w-0 flex-1">
-                          <Link href="/" className="flex items-center group mr-4 lg:mr-8 flex-shrink-0">
+                          <Link href="/" className="flex items-center group mr-4 lg:mr-8 flex-shrink-0 drop-shadow-lg">
                 <img 
                   src="https://res.cloudinary.com/ppbal/image/upload/v1755703718/2pbal_logo_cz5r0u.png" 
                   alt="2PBAL Logo" 
-                  className="h-10 w-auto sm:h-12 lg:h-16 object-contain" 
+                  className="h-10 w-auto sm:h-12 lg:h-16 object-contain drop-shadow-lg" 
                   onLoad={() => console.log('Logo loaded successfully')}
                   onError={(e) => {
                     console.error('Failed to load logo:', e);
@@ -134,8 +134,8 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                   }}
                 />
                 <div className="flex flex-col ml-3">
-                  <span className="text-gray-900 sm:text-white font-heading font-bold text-xs sm:text-sm lg:text-base drop-shadow-lg">Precise Programming</span>
-                  <span className="text-gray-600 sm:text-blue-100 text-xs sm:text-xs -mt-1 hidden sm:block font-body drop-shadow-lg">for Business Advancement & Leverage</span>
+                  <span className="text-gray-900 sm:text-white font-heading font-bold text-xs sm:text-sm lg:text-base drop-shadow-lg shadow-black/20">Precise Programming</span>
+                  <span className="text-gray-600 sm:text-blue-100 text-xs sm:text-xs -mt-1 hidden sm:block font-body drop-shadow-lg shadow-black/20">for Business Advancement & Leverage</span>
                 </div>
                 {/* Fallback logo if image doesn't load */}
                 <div className="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 bg-gradient-to-br from-gray-600 to-gray-700 sm:from-blue-500 sm:to-blue-600 rounded-lg flex items-center justify-center hidden" id="logo-fallback">
@@ -277,65 +277,116 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent className="w-[280px] sm:w-[320px] bg-white/95 backdrop-blur-xl border-l border-gray-200/50">
-                <div className="flex flex-col space-y-3 mt-8">
+              <SheetContent className="w-[320px] sm:w-[380px] bg-gradient-to-br from-gray-50 via-white to-gray-50 backdrop-blur-xl border-l border-gray-200/50 shadow-2xl">
+                {/* Header Section */}
+                <div className="flex items-center justify-between mb-8 pt-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-teal-600 rounded-xl flex items-center justify-center shadow-lg">
+                      <span className="text-white font-bold text-lg">2P</span>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-gray-900 text-lg">2PBAL</h3>
+                      <p className="text-xs text-gray-500 font-medium">Digital Solutions</p>
+                    </div>
+                  </div>
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    onClick={() => setIsOpen(false)}
+                    className="rounded-full w-10 h-10 hover:bg-gray-100"
+                  >
+                    <X className="h-5 w-5 text-gray-600" />
+                  </Button>
+                </div>
+
+                {/* Navigation Section */}
+                <div className="space-y-2 mb-8">
+                  <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 px-2">Navigation</h4>
                   {navigation.map((item) => (
                     <Link
                       key={item.name}
                       href={item.href}
-                      className={`flex items-center space-x-3 font-semibold text-lg transition-all duration-200 p-4 rounded-xl shadow-sm ${
+                      className={`flex items-center space-x-4 px-4 py-3 rounded-2xl transition-all duration-300 font-medium ${
                         location === item.href 
-                          ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg' 
-                          : 'text-gray-700 hover:bg-gray-50 hover:shadow-md border border-gray-100'
+                          ? 'bg-gradient-to-r from-blue-500 to-teal-500 text-white shadow-lg shadow-blue-500/25' 
+                          : 'text-gray-700 hover:bg-white hover:shadow-md hover:scale-[1.02] border border-transparent hover:border-gray-200'
                       }`}
                       onClick={() => setIsOpen(false)}
                     >
-                      {item.name === 'Home' && <Home className="h-5 w-5" />}
-                      <span>{item.name}</span>
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                        location === item.href 
+                          ? 'bg-white/20' 
+                          : 'bg-gray-100'
+                      }`}>
+                        {item.name === 'Home' && <Home className="h-4 w-4" />}
+                        {item.name === 'About Us' && <Users className="h-4 w-4" />}
+                        {item.name === 'Packages' && <Package className="h-4 w-4" />}
+                        {item.name === 'Services' && <Grid className="h-4 w-4" />}
+                      </div>
+                      <span className="text-sm font-semibold">{item.name}</span>
                     </Link>
                   ))}
-                  
+                </div>
 
-                  {isAuthenticated ? (
-                    <div className="space-y-2 pt-4 border-t">
-                      <Link href={user?.role === 'admin' ? '/admin-dashboard' : '/dashboard'} onClick={() => setIsOpen(false)}>
-                        <Button variant="ghost" className="w-full justify-start">
-                          <BarChart3 className="h-4 w-4 mr-2" />
-                          Dashboard
-                        </Button>
-                      </Link>
-                      <Link href="/profile-setup" onClick={() => setIsOpen(false)}>
-                        <Button variant="ghost" className="w-full justify-start">
-                          <Settings className="h-4 w-4 mr-2" />
-                          Profile Settings
-                        </Button>
-                      </Link>
-                      <Button
-                        variant="ghost"
-                        className="w-full justify-start text-red-600"
-                        onClick={() => {
-                          handleLogout();
-                          setIsOpen(false);
-                        }}
-                      >
-                        <LogOut className="h-4 w-4 mr-2" />
-                        Sign Out
+                {/* User Section */}
+                {isAuthenticated ? (
+                  <div className="space-y-2 mb-8">
+                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 px-2">Account</h4>
+                    <Link href={user?.role === 'admin' ? '/admin-dashboard' : '/dashboard'} onClick={() => setIsOpen(false)}>
+                      <Button variant="ghost" className="w-full justify-start px-4 py-3 rounded-2xl hover:bg-gray-100">
+                        <BarChart3 className="h-4 w-4 mr-3 text-blue-600" />
+                        <span className="font-medium">Dashboard</span>
                       </Button>
-                    </div>
-                  ) : (
-                    <div className="space-y-6 pt-8 border-t border-gray-200">
+                    </Link>
+                    <Link href="/profile-setup" onClick={() => setIsOpen(false)}>
+                      <Button variant="ghost" className="w-full justify-start px-4 py-3 rounded-2xl hover:bg-gray-100">
+                        <Settings className="h-4 w-4 mr-3 text-gray-600" />
+                        <span className="font-medium">Profile Settings</span>
+                      </Button>
+                    </Link>
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start px-4 py-3 rounded-2xl hover:bg-red-50 text-red-600"
+                      onClick={() => {
+                        handleLogout();
+                        setIsOpen(false);
+                      }}
+                    >
+                      <LogOut className="h-4 w-4 mr-3" />
+                      <span className="font-medium">Sign Out</span>
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="space-y-4 mb-8">
+                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 px-2">Get Started</h4>
+                    <Link href="/signup" onClick={() => setIsOpen(false)}>
+                      <Button className="w-full bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 py-4 font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 text-white">
+                        <Rocket className="h-4 w-4 mr-2" />
+                        Get Started
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+
+                {/* Bottom Section - Sign In for non-authenticated users */}
+                {!isAuthenticated && (
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <div className="bg-gray-50 rounded-2xl p-4 border border-gray-200">
+                      <p className="text-xs text-gray-600 mb-3 font-medium">Already have an account?</p>
                       <Link href="/login" onClick={() => setIsOpen(false)}>
-                        <Button variant="outline" className="w-full py-4 font-semibold rounded-xl border-2 hover:bg-gray-50">
+                        <Button variant="outline" className="w-full py-3 font-semibold rounded-xl border-2 hover:bg-white hover:shadow-md transition-all duration-200">
                           Sign In
                         </Button>
                       </Link>
-                      <Link href="/signup" onClick={() => setIsOpen(false)}>
-                        <Button className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 py-4 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
-                          Get Started
-                        </Button>
-                      </Link>
                     </div>
-                  )}
+                  </div>
+                )}
+
+                {/* Footer */}
+                <div className="absolute bottom-2 left-6 right-6">
+                  <p className="text-xs text-gray-400 text-center font-medium">
+                    © 2024 2PBAL. All rights reserved.
+                  </p>
                 </div>
               </SheetContent>
             </Sheet>
