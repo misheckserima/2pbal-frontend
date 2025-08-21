@@ -1,0 +1,45 @@
+{
+  "name": "2PBAL - Small Business Growth & Sales Boost",
+  "short_name": "2PBAL",
+  "description": "Transform your small business with 2PBAL's dedicated team. Boost sales, dominate online competition, and grow your brand. Free business consultation + affordable installment plans.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0D9488",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://res.cloudinary.com/ppbal/image/upload/v1755703718/2pbal_logo_cz5r0u.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://res.cloudinary.com/ppbal/image/upload/v1755703718/2pbal_logo_cz5r0u.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://res.cloudinary.com/ppbal/image/upload/v1755703718/2pbal_logo_cz5r0u.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://res.cloudinary.com/ppbal/image/upload/v1755703718/2pbal_logo_cz5r0u.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://res.cloudinary.com/ppbal/image/upload/v1755703718/2pbal_logo_cz5r0u.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "en",
+  "dir": "ltr"
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square150x150logo src="https://res.cloudinary.com/ppbal/image/upload/v1755703718/2pbal_logo_cz5r0u.png"/>
+            <square310x310logo src="https://res.cloudinary.com/ppbal/image/upload/v1755703718/2pbal_logo_cz5r0u.png"/>
+            <square70x70logo src="https://res.cloudinary.com/ppbal/image/upload/v1755703718/2pbal_logo_cz5r0u.png"/>
+            <TileColor>#0D9488</TileColor>
+        </tile>
+    </msapplication>
+</browserconfig>
