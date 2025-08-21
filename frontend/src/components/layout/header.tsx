@@ -279,30 +279,19 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
               </SheetTrigger>
               <SheetContent className="w-[280px] sm:w-[320px] bg-white/95 backdrop-blur-xl border-l border-gray-200/50">
                 <div className="flex flex-col space-y-3 mt-8">
-                  <Link
-                    href="/"
-                    className={`flex items-center space-x-3 font-semibold text-lg transition-all duration-200 p-4 rounded-xl shadow-sm ${
-                      location === '/' 
-                        ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg' 
-                        : 'text-gray-700 hover:bg-gray-50 hover:shadow-md border border-gray-100'
-                    }`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <Home className="h-5 w-5" />
-                    <span>Home</span>
-                  </Link>
                   {navigation.map((item) => (
                     <Link
                       key={item.name}
                       href={item.href}
-                      className={`font-semibold text-lg transition-all duration-200 p-4 rounded-xl shadow-sm ${
+                      className={`flex items-center space-x-3 font-semibold text-lg transition-all duration-200 p-4 rounded-xl shadow-sm ${
                         location === item.href 
                           ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg' 
                           : 'text-gray-700 hover:bg-gray-50 hover:shadow-md border border-gray-100'
                       }`}
                       onClick={() => setIsOpen(false)}
                     >
-                      {item.name}
+                      {item.name === 'Home' && <Home className="h-5 w-5" />}
+                      <span>{item.name}</span>
                     </Link>
                   ))}
                   
@@ -334,7 +323,7 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                       </Button>
                     </div>
                   ) : (
-                    <div className="space-y-4 pt-8 border-t border-gray-200">
+                    <div className="space-y-6 pt-8 border-t border-gray-200">
                       <Link href="/login" onClick={() => setIsOpen(false)}>
                         <Button variant="outline" className="w-full py-4 font-semibold rounded-xl border-2 hover:bg-gray-50">
                           Sign In
