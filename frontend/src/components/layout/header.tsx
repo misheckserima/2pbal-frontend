@@ -116,7 +116,7 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
         </div>
       )}
       
-      <header className={`bg-gradient-to-r from-blue-900/95 to-blue-800/95 sm:bg-gradient-to-r sm:from-blue-900/95 sm:to-blue-800/95 bg-transparent backdrop-blur-md shadow-lg border-b border-blue-700/30 fixed w-full z-40 ${isAuthenticated && !user?.emailVerified ? 'top-10' : 'top-0'}`}>
+      <header className={`bg-gradient-to-r from-gray-50/95 to-gray-100/95 sm:bg-gradient-to-r sm:from-blue-900/95 sm:to-blue-800/95 backdrop-blur-md shadow-lg border-b border-gray-200/30 sm:border-blue-700/30 fixed w-full z-40 ${isAuthenticated && !user?.emailVerified ? 'top-10' : 'top-0'}`}>
       <nav className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
         <div className="flex justify-between items-center h-16 lg:h-20">
           <div className="flex items-center min-w-0 flex-1">
@@ -134,15 +134,15 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                   }}
                 />
                 <div className="flex flex-col ml-3">
-                  <span className="text-white font-heading font-bold text-xs sm:text-sm lg:text-base drop-shadow-lg">Precise Programming</span>
-                  <span className="text-blue-100 text-xs sm:text-xs -mt-1 hidden sm:block font-body drop-shadow-lg">for Business Advancement & Leverage</span>
+                  <span className="text-gray-900 sm:text-white font-heading font-bold text-xs sm:text-sm lg:text-base drop-shadow-lg">Precise Programming</span>
+                  <span className="text-gray-600 sm:text-blue-100 text-xs sm:text-xs -mt-1 hidden sm:block font-body drop-shadow-lg">for Business Advancement & Leverage</span>
                 </div>
                 {/* Fallback logo if image doesn't load */}
-                <div className="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center hidden" id="logo-fallback">
+                <div className="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 bg-gradient-to-br from-gray-600 to-gray-700 sm:from-blue-500 sm:to-blue-600 rounded-lg flex items-center justify-center hidden" id="logo-fallback">
                   <span className="text-white font-bold text-xs sm:text-sm lg:text-base">2P</span>
                 </div>
               </Link>
-            <span className="text-xs sm:text-sm text-blue-100 font-medium hidden xl:block truncate ml-4">
+            <span className="text-xs sm:text-sm text-gray-600 sm:text-blue-100 font-medium hidden xl:block truncate ml-4">
               Enterprise Results, Without Enterprise Costs
             </span>
           </div>
@@ -273,7 +273,7 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
           <div className="lg:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="p-2 min-h-[44px] min-w-[44px] text-white hover:bg-white/20 backdrop-blur-sm rounded-xl border border-white/20">
+                <Button variant="ghost" size="icon" className="p-2 min-h-[44px] min-w-[44px] text-gray-900 sm:text-white hover:bg-gray-200/50 sm:hover:bg-white/20 backdrop-blur-sm rounded-xl border border-gray-200/50 sm:border-white/20">
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>

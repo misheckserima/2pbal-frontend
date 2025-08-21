@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,6 +15,9 @@ import { Eye, EyeOff, Mail, Lock, User, Building, Phone, ArrowLeft, Shield, Chec
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Signup() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [, setLocation] = useLocation();
   const { signup, isSignupLoading, signupError } = useAuth();
   const { toast } = useToast();

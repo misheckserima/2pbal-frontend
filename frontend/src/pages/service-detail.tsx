@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -915,6 +915,10 @@ const ENHANCED_SERVICE_DATA = {
 };
 
 export default function ServiceDetail() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const { serviceId } = useParams<{ serviceId: string }>();
   const [activeTab, setActiveTab] = useState('overview');
   

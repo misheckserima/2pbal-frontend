@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AccessibilityPanel } from "@/components/ui/accessibility-toggle";
 import { ContextualHelp } from "@/components/ui/contextual-help";
+import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import SavingsCalculator from "@/components/ui/savings-calculator";
@@ -46,6 +47,7 @@ function Router() {
 
   return (
     <>
+      <ScrollToTop />
       <Header onOpenCalculator={() => setCalculatorOpen(true)} />
       <main>
         <Switch>

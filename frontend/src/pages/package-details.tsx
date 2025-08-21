@@ -12,6 +12,10 @@ interface PackageDetailsProps {
 }
 
 export default function PackageDetails({ onOpenCalculator }: PackageDetailsProps) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const [, params] = useRoute('/package/:id') || useRoute('/package-details/:id');
   const packageId = params?.id;
   const [showSavingsCalculator, setShowSavingsCalculator] = useState(false);

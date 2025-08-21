@@ -11,8 +11,12 @@ import {
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect } from 'react';
 
 export default function Dashboard() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { user, logout, isLoading } = useAuth();
   const [, setLocation] = useLocation();
   const { toast } = useToast();

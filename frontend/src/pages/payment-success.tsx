@@ -64,6 +64,10 @@ export default function PaymentSuccess() {
   const [showConfetti, setShowConfetti] = useState(true);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     // Show confetti animation and then hide it
     const timer = setTimeout(() => {
       setShowConfetti(false);

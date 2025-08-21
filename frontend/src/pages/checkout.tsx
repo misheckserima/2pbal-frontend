@@ -20,6 +20,10 @@ const stripePromise = import.meta.env.VITE_STRIPE_PUBLIC_KEY
   : null;
 
 const CheckoutForm = ({ orderDetails }: { orderDetails: any }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const stripe = useStripe();
   const elements = useElements();
   const { toast } = useToast();

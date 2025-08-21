@@ -51,6 +51,7 @@ export interface User {
   phone?: string;
   bio?: string;
   role: 'user' | 'admin';
+  emailVerified?: boolean;
   createdAt: string;
   updatedAt: string;
 }
