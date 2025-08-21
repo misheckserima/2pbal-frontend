@@ -134,8 +134,8 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                   }}
                 />
                 <div className="flex flex-col ml-3">
-                  <span className="text-gray-900 sm:text-white font-heading font-bold text-xs sm:text-sm lg:text-base drop-shadow-lg shadow-black/20">Precise Programming</span>
-                  <span className="text-gray-600 sm:text-blue-100 text-xs sm:text-xs -mt-1 hidden sm:block font-body drop-shadow-lg shadow-black/20">for Business Advancement & Leverage</span>
+                  <span className="text-gray-900 sm:text-white font-heading font-bold text-xs sm:text-sm lg:text-base">Precise Programming</span>
+                  <span className="text-gray-600 sm:text-blue-100 text-xs sm:text-xs -mt-1 hidden sm:block font-body">for Business Advancement & Leverage</span>
                 </div>
                 {/* Fallback logo if image doesn't load */}
                 <div className="h-10 w-10 sm:h-12 sm:w-12 lg:h-16 lg:w-16 bg-gradient-to-br from-gray-600 to-gray-700 sm:from-blue-500 sm:to-blue-600 rounded-lg flex items-center justify-center hidden" id="logo-fallback">
@@ -281,8 +281,12 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                 {/* Header Section */}
                 <div className="flex items-center justify-between mb-8 pt-4">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-teal-600 rounded-xl flex items-center justify-center shadow-lg">
-                      <span className="text-white font-bold text-lg">2P</span>
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
+                      <img 
+                        src="https://res.cloudinary.com/ppbal/image/upload/v1755703718/2pbal_logo_cz5r0u.png" 
+                        alt="2PBAL Logo" 
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 text-lg">2PBAL</h3>
