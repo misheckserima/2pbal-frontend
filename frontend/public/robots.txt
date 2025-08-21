@@ -20,5 +20,10 @@ Allow: /careers
 Allow: /quote
 Allow: /privacy-policy
 
+# Allow favicon and manifest files
+Allow: /favicon.ico
+Allow: /site.webmanifest
+Allow: /browserconfig.xml
+
 # Crawl delay (optional)
 Crawl-delay: 1

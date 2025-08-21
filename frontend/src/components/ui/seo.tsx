@@ -16,7 +16,7 @@ interface SEOProps {
 
 export const SEO = ({
   title = '2PBAL - Small Business Growth & Sales Boost | Free Consultation | Installment Plans',
-  description = 'Transform your small business with 2PBAL\'s dedicated team. Boost sales, dominate online competition, and grow your brand. Free business consultation + affordable installment plans. Save 70% vs agencies. Perfect for startups and small businesses.',
+  description = '2PBAL helps small businesses and startups grow, boost sales, and dominate online competition. Get free business consultation, affordable installment plans, and dedicated team support. Save 70% vs agencies. Perfect for business growth and digital transformation.',
   keywords = 'small business growth, startup help, sales boost, online competition, brand growth, free business consultation, affordable digital services, installment plans, cheap web development, small business marketing, startup digital solutions, business growth services, dedicated team, cost-effective, web development, digital marketing, AI automation',
   image = 'https://res.cloudinary.com/ppbal/image/upload/v1755703718/2pbal_logo_cz5r0u.png',
   url = 'https://2pbal.com',
